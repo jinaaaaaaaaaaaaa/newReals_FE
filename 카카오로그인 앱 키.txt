@@ -1,0 +1,17 @@
+<카카오로그인 앱 키>
+
+네이티브 앱 키
+80c4ee330e62abc5f0347e4795e261bc
+Android, iOS SDK에서 API를 호출할 때 사용
+
+REST API 키
+4a076106ee151916a04c2f7b2ec0b9f8
+REST API를 호출할 때 사용
+
+JavaScript 키
+5c6d051daf84d0377a9e5c04e9d58d4f
+JavaScript SDK에서 API를 호출할 때 사용
+
+Admin 키
+c67876cbaa9e40f31844024847eecd10
+모든 권한을 갖고 있는 키. 노출되지 않도록 주의

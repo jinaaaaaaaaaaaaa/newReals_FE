@@ -5,15 +5,18 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import prettier from 'eslint-plugin-prettier'; // Prettier 플러그인 추가
 import eslintConfigPrettier from 'eslint-config-prettier'; // eslint-config-prettier 추가
+import parser from '@typescript-eslint/parser';
 
 export default tseslint.config(
   { ignores: ['dist'] },
   {
+    parser,
     extends: [js.configs.recommended, ...tseslint.configs.recommended, eslintConfigPrettier],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      jsx: true,
     },
     plugins: {
       'react-hooks': reactHooks,
