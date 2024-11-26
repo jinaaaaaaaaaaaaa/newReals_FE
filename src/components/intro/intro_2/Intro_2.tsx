@@ -11,7 +11,9 @@ const TagProps = [
 const Intro_2 = () => {
   return (
     <S.SecondIntro>
-      newReal에서 맞춤형 뉴스를 추천받아요!
+      <p>
+        <S.Logo>newReals </S.Logo>에서 맞춤형 뉴스를 추천받아요!
+      </p>
       <S.Tag>
         {TagProps.map((item, index) => (
           <Tag key={index} children={`# ${item}`} color="purple" size="large" />
