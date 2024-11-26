@@ -1,7 +1,6 @@
 import * as S from './KakaoLogin.Style';
 import kakaoButton from '../../../assets/icons/kakaoButton.svg';
 import React from 'react';
-import IntroLoginImg from '../../../assets/icons/IntroLoginIcon.svg';
 
 const KakaoLogin: React.FC = () => {
   const kakaoRestKey = import.meta.env.VITE_KAKAO_REST_KEY;
@@ -17,13 +16,10 @@ const KakaoLogin: React.FC = () => {
 
   return (
     <S.Container>
-      <div>
-        <S.StartMent>
-          그럼 이제 <S.Purple>newReals</S.Purple>를 시작해볼까요?
-        </S.StartMent>
-        <S.KakaoButton onClick={handleLoginClick} src={kakaoButton} alt="카카오로그인" />
-      </div>
-      <S.ImgPart src={IntroLoginImg} />
+      <S.StartMent>
+        그럼 이제 <S.Purple>newReals</S.Purple>를 시작해볼까요?
+      </S.StartMent>
+      <S.KakaoButton onClick={handleLoginClick} src={kakaoButton} alt="카카오로그인" />
     </S.Container>
   );
 };

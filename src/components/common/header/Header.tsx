@@ -1,5 +1,5 @@
 import * as S from './Header.Style';
-import Logo from '../../../assets/icons/Logo.svg';
+import Logo from '../../../assets/images/Logo.svg';
 import PeopleIcon from '../../../assets/icons/PeopleIcon.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';

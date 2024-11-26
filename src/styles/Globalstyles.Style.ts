@@ -18,7 +18,6 @@ const GlobalStyles = styled.createGlobalStyle`
   body,
   html {
     font-family: 'Pretendard';
-    font-family: 'Syncopate';
     cursor: default;
   }
 

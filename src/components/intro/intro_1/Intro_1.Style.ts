@@ -6,12 +6,6 @@ export const FirstIntro = styled.div`
   height: 320px;
   align-self: stretch;
   background-color: ${Colors.Main5};
-  gap: 6rem;
-  justify-content: center;
-  align-items: center; /* 세로 정렬 */
-  display: flex;
-  width: 100%;
-  overflow: hidden;
 `;
 
 export const Purple = styled.span`
@@ -20,19 +14,13 @@ export const Purple = styled.span`
 
 export const Slogan = styled.p`
   color: ${Colors.Grayscale90};
-  font-family: Syncopate;
+  font-family: Syncopate; // 적용 안되는것같다
   font-size: 36px;
-  line-height: 120%;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 43.2px */
 `;
 export const Info = styled.p`
   color: ${Colors.Grayscale70};
   ${FontStyles.MD1_Medium};
-  margin-top: 0.5rem;
-`;
-
-export const Img = styled.img`
-  height: auto;
-  width: 46.25rem;
-  margin-top: 3rem;
-  object-fit: cover;
 `;
