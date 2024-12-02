@@ -19,11 +19,14 @@ interface KeywordListProps {
 const KeywordList = ({ list, isActives, onToggleKeyword, type = 'register' }: KeywordListProps) => {
   return (
     <S.KeywordList $type={type}>
-      {list.map((keyword) => (
-        <Keyword key={keyword} isActive={isActives.includes(keyword)} onToggle={onToggleKeyword}>
-          {keyword}
-        </Keyword>
-      ))}
+      {list.map((keyword) => {
+        const isActive = isActives.includes(keyword);
+        return (
+          <Keyword key={keyword} isActive={isActive} onToggle={onToggleKeyword}>
+            {keyword}
+          </Keyword>
+        );
+      })}
     </S.KeywordList>
   );
 };

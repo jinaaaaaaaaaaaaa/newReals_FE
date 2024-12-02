@@ -10,7 +10,7 @@ export const Item = styled.div`
 `;
 
 export const TitleContainer = styled.div`
-  ${FontStyles.MD1_SemiBold}
+  ${FontStyles.MD2_SemiBold}
   display: flex;
   gap: 0.75rem;
   align-items: center;

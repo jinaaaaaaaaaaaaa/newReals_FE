@@ -1,41 +1,70 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
 import * as S from './Insight.Style';
 import Item from './Item';
+import { getInsight } from '../../../../api/Profile';
 
-const MOCK_DATA = [
-  {
-    title: '대한민국 무역 투자 강화하기',
-    comment:
-      '무역 투자 강화는 국내 기업의 글로벌 경쟁력을 높이고 경제 성장을 촉진하는데 중요해요. 중요해요',
-    id: 1,
-  },
-  {
-    title: '대한민국 무역 투자 강화하기',
-    comment:
-      '무역 투자 강화는 국내 기업의 글로벌 경쟁력을 높이고 경제 성장을 촉진하는데 중요해요. 중요해요',
-    id: 2,
-  },
-  {
-    title: '대한민국 무역 투자 강화하기',
-    comment:
-      '무역 투자 강화는 국내 기업의 글로벌 경쟁력을 높이고 경제 성장을 촉진하는데 중요해요. 중요해요',
-    id: 3,
-  },
-  {
-    title: '대한민국 무역 투자 강화하기',
-    comment:
-      '무역 투자 강화는 국내 기업의 글로벌 경쟁력을 높이고 경제 성장을 촉진하는데 중요해요. 중요해요',
-    id: 4,
-  },
-];
+interface InsightProps {
+  topic: string;
+  newsId: number;
+  userComment: string;
+}
 
 const Insight = () => {
+  const [insightList, setInsightList] = useState<InsightProps[]>([]);
+  const [nextPage, setNextPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const observerRef = useRef<HTMLDivElement | null>(null);
+
+  const fetchData = useCallback(async () => {
+    if (isLoading || !hasMore) return;
+    setIsLoading(true);
+
+    try {
+      const insight = await getInsight(nextPage);
+      if (insight && insight.insightList.length > 0) {
+        setInsightList((prev) => [...prev, ...insight.insightList]);
+        setNextPage((prev) => prev + 1);
+        setHasMore(insight.hasNext);
+      } else {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error('Failed to fetch insights:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [isLoading, hasMore, nextPage]);
+
+  useEffect(() => {
+    if (!hasMore || isLoading) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchData();
+        }
+      },
+      { rootMargin: '20px', threshold: 0.1 },
+    );
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) observer.disconnect();
+    };
+  }, [fetchData, hasMore, isLoading]);
+
   return (
     <S.Container>
       <S.Text>나의 인사이트</S.Text>
       <S.Insight>
-        {MOCK_DATA.map((item) => (
-          <Item key={item.id} title={item.title} comment={item.comment} id={item.id} />
+        {insightList.map((item) => (
+          <Item key={item.newsId} title={item.topic} comment={item.userComment} id={item.newsId} />
         ))}
+        <div ref={observerRef} style={{ height: '1px' }} />
       </S.Insight>
     </S.Container>
   );

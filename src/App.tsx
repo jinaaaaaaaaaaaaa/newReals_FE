@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import AppRouter from './Router';
 import Footer from './components/common/footer/Footer';
 import { useEffect } from 'react';
+import * as S from './App.Style';
 
 const App = () => {
   const navigate = useNavigate();
@@ -12,16 +13,18 @@ const App = () => {
 
     if (accessToken && location.pathname === '/') {
       navigate('/home');
-    } else {
+    } else if (!accessToken) {
       navigate('/');
     }
   }, []);
 
   return (
-    <>
-      <AppRouter />
+    <S.AppContainer>
+      <S.MainContent>
+        <AppRouter />
+      </S.MainContent>
       <Footer />
-    </>
+    </S.AppContainer>
   );
 };
 

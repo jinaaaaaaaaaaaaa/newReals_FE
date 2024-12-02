@@ -14,12 +14,8 @@ interface KeywordProps {
  * @returns
  */
 const Keyword = ({ children, isActive, onToggle }: KeywordProps) => {
-  const handleClick = () => {
-    onToggle(children);
-  };
-
   return (
-    <S.Keyword $isActive={isActive} onClick={handleClick}>
+    <S.Keyword $isActive={isActive} onClick={() => onToggle(children)}>
       {children}
     </S.Keyword>
   );

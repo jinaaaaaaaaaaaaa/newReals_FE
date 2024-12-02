@@ -1,23 +1,34 @@
 import { useRef, useState } from 'react';
 import * as S from './ThinkingPart.Style';
 import AfterThinking from './AfterThinking';
+import { useParams } from 'react-router-dom';
+import Loading from '../../common/Loading/Loding';
+import { sendInsight } from '../../../api/NewsDetail';
 
 interface ThinkingPartProps {
   topic: string;
+  userComment: string | null;
+  aiComment: string | null;
+  pros: string | null;
+  cons: string | null;
+  neutral: string | null;
+  onCommentUpdated: () => void;
 }
 
-/**
- *
- * @param topic - 생각정리
- * @returns
- */
-
-const ThinkingPart = ({ topic }: ThinkingPartProps) => {
-  const [isFinished, setIsFinished] = useState(false);
+const ThinkingPart = ({
+  topic,
+  userComment,
+  aiComment,
+  pros,
+  cons,
+  neutral,
+  onCommentUpdated,
+}: ThinkingPartProps) => {
   const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const { id } = useParams();
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const [isError, setIsError] = useState(false);
-  const [thinkingContent, setThinkingContent] = useState<string | null>(null);
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = event.target.value;
 
@@ -37,42 +48,55 @@ const ThinkingPart = ({ topic }: ThinkingPartProps) => {
     }
     handleClickSendButton(inputValue);
     setInputValue('');
-    setIsFinished(true);
   };
 
-  const handleClickSendButton = (input: string) => {
-    setThinkingContent(input);
+  const handleClickSendButton = async (input: string) => {
+    setIsLoading(true);
+    try {
+      const isSuccess = await sendInsight(Number(id), input); // 데이터 저장 요청
+      if (isSuccess) {
+        onCommentUpdated(); // 저장 성공 시 서버 데이터 다시 가져오기
+      }
+    } catch (error) {
+      console.error('오류 발생:', error);
+    } finally {
+      setIsLoading(false); // 로딩 상태 비활성화
+    }
   };
 
   return (
     <S.Whole>
       <S.Topic>{topic}</S.Topic>
-      {isFinished ? (
-        thinkingContent && (
-          <AfterThinking
-            thinkingContent={thinkingContent}
-            positiveContent="백연결"
-            neutralContent="백연결"
-            negativeContent="백연결"
-            //aiThinking="이렇게생각해요"
-          />
-        )
+      {isLoading ? (
+        <Loading message="다른 사람들의 의견을 정리하고 있어요" />
       ) : (
         <>
-          <S.TypingPart $isError={isError}>
-            <S.InputPart
-              value={inputValue}
-              onChange={handleInputChange}
-              placeholder="당신의 의견을 들려주세요."
-            ></S.InputPart>
-            <S.Info>
-              {isError && <S.ErrorMessage>300자를 초과할 수 없습니다.</S.ErrorMessage>}
-              <S.CurrentType $isError={isError}>{inputValue.length}/300</S.CurrentType>
-            </S.Info>
-          </S.TypingPart>
-          <S.ButtonWrapper>
-            <S.TypingButton onClick={onSubmit}>등록하기</S.TypingButton>
-          </S.ButtonWrapper>
+          {userComment ? (
+            <AfterThinking
+              thinkingContent={userComment}
+              positiveContent={pros}
+              neutralContent={neutral}
+              negativeContent={cons}
+              aiThinking={aiComment}
+            />
+          ) : (
+            <>
+              <S.TypingPart $isError={isError}>
+                <S.InputPart
+                  value={inputValue}
+                  onChange={handleInputChange}
+                  placeholder="당신의 의견을 들려주세요."
+                ></S.InputPart>
+                <S.Info>
+                  {isError && <S.ErrorMessage>300자를 초과할 수 없습니다.</S.ErrorMessage>}
+                  <S.CurrentType $isError={isError}>{inputValue.length}/300</S.CurrentType>
+                </S.Info>
+              </S.TypingPart>
+              <S.ButtonWrapper>
+                <S.TypingButton onClick={onSubmit}>등록하기</S.TypingButton>
+              </S.ButtonWrapper>
+            </>
+          )}
         </>
       )}
     </S.Whole>

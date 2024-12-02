@@ -5,7 +5,7 @@ interface KeywordProps {
 }
 
 const Keyword = ({ keyword }: KeywordProps) => {
-  return <S.Keyword>#{keyword}</S.Keyword>;
+  return <S.Keyword># {keyword}</S.Keyword>;
 };
 
 export default Keyword;

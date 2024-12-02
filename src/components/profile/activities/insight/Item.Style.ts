@@ -11,10 +11,18 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.header`
-  ${FontStyles.MD1_SemiBold}
   display: flex;
   justify-content: space-between;
   color: ${Colors.Grayscale90};
+`;
+
+export const Title = styled.span`
+  ${FontStyles.MD1_SemiBold}
+  color: ${Colors.Grayscale90};
+  max-width: 37.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const goToDetail = styled.div`
@@ -26,8 +34,15 @@ export const goToDetail = styled.div`
 `;
 
 export const Comment = styled.div`
-  ${FontStyles.MD2_Medium}
   display: flex;
   gap: 0.5rem;
+`;
+
+export const Text = styled.p`
+  ${FontStyles.MD2_Medium}
   color: ${Colors.Grayscale70};
+  max-width: 43rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

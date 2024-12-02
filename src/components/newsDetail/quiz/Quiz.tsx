@@ -3,12 +3,16 @@ import * as S from './Quiz.Style';
 import OIcon from '../../../assets/icons/OIcon.svg?react';
 import XIcon from '../../../assets/icons/XIcon.svg?react';
 import { useEffect, useState } from 'react';
+import AnswerModal from './AnswerModal';
+import { useParams } from 'react-router-dom';
+import { sendQuizAnswer } from '../../../api/NewsDetail';
 
 interface Quiz {
   quiz: string;
   isSolved: boolean;
   answer: boolean;
   comment: string;
+  onCommentUpdated: () => void;
 }
 
 //@TODO
@@ -22,8 +26,12 @@ interface Quiz {
  * @param comment - 퀴즈의 해설
  * @returns
  */
-const Quiz = ({ quiz, isSolved, answer, comment }: Quiz) => {
+
+const Quiz = ({ quiz, isSolved, answer, comment, onCommentUpdated }: Quiz) => {
   const [timeLeft, setTimeLeft] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const { id } = useParams();
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -55,12 +63,20 @@ const Quiz = ({ quiz, isSolved, answer, comment }: Quiz) => {
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 해제
   }, []);
 
-  const handleClickO = () => {
-    console.log('O 클릭 했을 때 백엔드 연결해야함');
+  const handleModal = () => {
+    setIsOpen((prev) => {
+      // 모달이 닫히는 시점에서만 렌더링 트리거
+      if (prev) {
+        onCommentUpdated(); // 렌더링 트리거
+      }
+      return !prev;
+    });
   };
 
-  const handleClickX = () => {
-    console.log('X 클릭 했을 때 백엔드 연결해야함');
+  const handleAnswerClick = async (userAnswer: boolean) => {
+    handleModal();
+    answer === userAnswer ? setIsCorrect(true) : setIsCorrect(false);
+    sendQuizAnswer(Number(id), userAnswer);
   };
 
   return (
@@ -76,14 +92,24 @@ const Quiz = ({ quiz, isSolved, answer, comment }: Quiz) => {
         {isSolved ? (
           <QuizAnswer color="purple" answer={answer} comment={comment} />
         ) : (
-          <S.ButtonContainer>
-            <S.Button onClick={handleClickO} $buttonStyle="left">
-              <OIcon />
-            </S.Button>
-            <S.Button onClick={handleClickX} $buttonStyle="right">
-              <XIcon />
-            </S.Button>
-          </S.ButtonContainer>
+          <>
+            <S.ButtonContainer>
+              <S.Button onClick={() => handleAnswerClick(true)} $buttonStyle="left">
+                <OIcon />
+              </S.Button>
+              <S.Button onClick={() => handleAnswerClick(false)} $buttonStyle="right">
+                <XIcon />
+              </S.Button>
+            </S.ButtonContainer>
+            {isOpen && (
+              <AnswerModal
+                isCorrect={isCorrect}
+                answer={answer}
+                comment={comment}
+                onClose={handleModal}
+              />
+            )}
+          </>
         )}
       </S.Content>
     </S.Container>

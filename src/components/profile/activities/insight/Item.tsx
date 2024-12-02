@@ -13,13 +13,13 @@ const Item = ({ title, comment, id }: ItemProps) => {
   const navigate = useNavigate();
 
   const handleClickDetail = () => {
-    navigate(`newsDetail/${id}`);
+    navigate(`/newsDetail/${id}`);
   };
 
   return (
     <S.Container>
       <S.Header>
-        {title}
+        <S.Title>{title}</S.Title>
         <S.goToDetail onClick={handleClickDetail}>
           자세히 보기
           <RightArrowIcon />
@@ -27,7 +27,7 @@ const Item = ({ title, comment, id }: ItemProps) => {
       </S.Header>
       <S.Comment>
         <Tag color="purple">나의 의견</Tag>
-        {comment}
+        <S.Text>{comment}</S.Text>
       </S.Comment>
     </S.Container>
   );

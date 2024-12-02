@@ -13,6 +13,14 @@ export const SecondIntro = styled.div`
   align-self: stretch;
 `;
 
+export const Logo = styled.span`
+  color: ${Colors.Black};
+  text-align: center;
+  font-family: 'Syncopate';
+  font-size: 1.875rem;
+  line-height: 140%;
+`;
+
 export const Tag = styled.div`
   display: flex;
   white-space: nowrap;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Colors, FontStyles } from '../../../styles';
 
-export const HeadNews = styled.div<{ $imageUrl: string }>`
+export const HeadNews = styled.div<{ $imageUrl: string | null }>`
   ${FontStyles.LG_Bold}
   width: 100%;
   height: 24rem;
@@ -9,7 +9,7 @@ export const HeadNews = styled.div<{ $imageUrl: string }>`
     ${(props) => `url(${props.$imageUrl})`};
   background-size: cover;
   background-position: center;
-  padding: 6.875rem 8.5rem 3.125rem;
+  padding: 6.875rem 0rem 3.125rem 8.5rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;

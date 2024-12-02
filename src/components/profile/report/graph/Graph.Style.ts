@@ -29,4 +29,6 @@ export const Content = styled.div`
   gap: 0.75rem;
   background-color: ${Colors.Main0};
   border-radius: 0.5rem;
+  padding: 0.75rem;
+  justify-content: center;
 `;

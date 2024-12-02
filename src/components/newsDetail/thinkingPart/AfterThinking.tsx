@@ -3,10 +3,10 @@ import * as S from './AfterThinking.Style';
 
 interface ThinkingProps {
   thinkingContent: string;
-  positiveContent?: string;
-  neutralContent?: string;
-  negativeContent?: string;
-  aiThinking?: string;
+  positiveContent: string | null;
+  neutralContent: string | null;
+  negativeContent: string | null;
+  aiThinking: string | null;
 }
 
 const AfterThinking = ({

@@ -47,6 +47,44 @@ export const getAttendance = async () => {
 };
 
 /**
+ * 스크랩 뉴스 리스트 조회
+ * @param page - 페이지네이션
+ * @returns
+ */
+export const getScrap = async (page: number) => {
+  try {
+    const response = await api.get('/accounts/profile/scrap', {
+      params: { page },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (response.data.success) {
+      return response.data.data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
+ * 스크랩 뉴스 스크랩 해제
+ * @param newsId - 스크랩 취소할 뉴스의 아이디
+ */
+export const deleteScrap = async (newsId: number) => {
+  try {
+    await api.delete('/accounts/profile/unscrap', {
+      params: { newsId },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
  * 프로필 정보 수정
  * @param name - 변경할 이름
  * @param file - 변경할 프로필 이미지 파일
@@ -71,7 +109,104 @@ export const patchProfile = async (name?: string, file?: File) => {
       },
     });
     if (response.data.success) {
-      return response.data; // 이 부분 바꿔야 함..ㅜㅜ
+      return response.data.data.name;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
+ * 관심사 수정
+ * @param keywords - 수정할 관심사 키워드 리스트
+ * @returns
+ */
+export const putKeywords = async (keywords: string[]) => {
+  try {
+    const response = await api.put('/accounts/register/edit', keywords, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    return response.data.success;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
+ * 나의 활동 - 관심사 분석 조회
+ * @returns
+ */
+export const getInterest = async () => {
+  try {
+    const response = await api.get('/accounts/profile/interest', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (response.data.success) {
+      return response.data.data.interest;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
+ * 퀴즈 현황 조회
+ * @returns
+ */
+export const getQuiz = async () => {
+  try {
+    const response = await api.get('/accounts/profile/quiz', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (response.data.success) {
+      return response.data.data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
+ * 나의 활동 - 나의 인사이트 리스트 조회
+ * @param page - 무한스크롤 페이지
+ * @returns
+ */
+export const getInsight = async (page: number) => {
+  try {
+    const response = await api.get('/accounts/profile/insight', {
+      params: { page },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (response.data.success) {
+      return response.data.data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
+ * 분석 레포트 조회
+ * @returns
+ */
+export const getReport = async () => {
+  try {
+    const response = await api.get('/accounts/report', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (response.data.success) {
+      return response.data.data;
     }
   } catch (error) {
     console.error(error);

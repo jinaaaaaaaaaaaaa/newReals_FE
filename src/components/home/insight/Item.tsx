@@ -20,7 +20,7 @@ const Item = ({ category, title, newsId }: ItemProps) => {
   const navigate = useNavigate();
 
   const goToNews = () => {
-    navigate(`newsDetail/${newsId}`);
+    navigate(`/newsDetail/${newsId}`);
   };
 
   return (

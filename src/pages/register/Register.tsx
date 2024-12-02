@@ -26,7 +26,7 @@ const Register = () => {
   return (
     <S.Content>
       <Text nickname={nickname} />
-      <TabBar type="CATEGORY" selectedItem={category} onClick={handleCategory} />
+      <TabBar type="category" selectedItem={category} onClick={handleCategory} />
       <S.Categories>
         {CATEGORIES[category] &&
           Object.entries(CATEGORIES[category]).map(([subcategory, keywords]) => (

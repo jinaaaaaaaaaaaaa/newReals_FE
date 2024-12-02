@@ -1,34 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Chip from '../../../common/chip/Chip';
 import Chart from '../analysisCard/chart/Chart';
 import * as S from './AnalysisCard.Style';
 import { CATEGORIES } from '../../../../constants/Category';
 import Grade from '../analysisCard/grade/Grade';
+import { getInterest } from '../../../../api/Profile';
 
 const CATEGORY = Object.keys(CATEGORIES);
 
-const categoryData = {
-  전체: [
-    { rank: 1, category: '경제', subCategory: '소카테고리', value: 70 },
-    { rank: 2, category: '사회', subCategory: '소카테고리', value: 20 },
-    { rank: 3, category: '정치', subCategory: '소카테고리', value: 10 },
-  ],
-  사회: [
-    { rank: 1, category: '사회', subCategory: '사건사고', value: 60 },
-    { rank: 2, category: '사회', subCategory: '교육', value: 30 },
-    { rank: 3, category: '사회', subCategory: '노동', value: 10 },
-  ],
-  정치: [
-    { rank: 1, category: '정치', subCategory: '대통령실', value: 50 },
-    { rank: 2, category: '정치', subCategory: '국회/정당', value: 30 },
-    { rank: 3, category: '정치', subCategory: '북한', value: 20 },
-  ],
-  경제: [
-    { rank: 1, category: '경제', subCategory: '금융', value: 40 },
-    { rank: 2, category: '경제', subCategory: '증권', value: 35 },
-    { rank: 3, category: '경제', subCategory: '부동산', value: 25 },
-  ],
-};
+interface AnalysisDataProps {
+  category: string;
+  subCategory: string;
+  percentage: number;
+}
+
+interface InterestDataProps {
+  전체: AnalysisDataProps[];
+  경제: AnalysisDataProps[];
+  정치: AnalysisDataProps[];
+  사회: AnalysisDataProps[];
+}
 
 interface AnalysisCardProps {
   nickname: string;
@@ -36,15 +27,31 @@ interface AnalysisCardProps {
 
 const AnalysisCard = ({ nickname }: AnalysisCardProps) => {
   const [category, setCategory] = useState('전체');
+  const [interestData, setInterestData] = useState<InterestDataProps>({
+    전체: [],
+    경제: [],
+    정치: [],
+    사회: [],
+  });
 
   const handleClickCategory = (item: string) => {
     setCategory(item === category ? '전체' : item);
   };
 
-  const values = (categoryData[category as keyof typeof categoryData] || []).map((item) => ({
-    value: item.value,
-    subCategory: item.subCategory,
-  }));
+  useEffect(() => {
+    const fetchData = async () => {
+      const interestData = await getInterest();
+      if (interestData) {
+        setInterestData(interestData);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const filteredData =
+    category === '전체'
+      ? interestData.전체
+      : interestData[category as keyof InterestDataProps] || [];
 
   return (
     <S.Container>
@@ -55,7 +62,13 @@ const AnalysisCard = ({ nickname }: AnalysisCardProps) => {
         </S.Description>
       </div>
       <S.Analysis>
-        <Chart category={category} values={values} />
+        <Chart
+          category={category}
+          values={filteredData.map((item) => ({
+            value: item.percentage,
+            subCategory: item.subCategory,
+          }))}
+        />
         <S.Content>
           <S.Categories>
             {CATEGORY.map((item) => (
@@ -69,13 +82,13 @@ const AnalysisCard = ({ nickname }: AnalysisCardProps) => {
             ))}
           </S.Categories>
           <S.GradeList>
-            {categoryData[category as keyof typeof categoryData].map((item) => (
+            {interestData[category as keyof typeof interestData].map((item, index) => (
               <Grade
-                key={item.rank}
-                grade={item.rank}
+                key={index}
+                grade={index + 1}
                 category={item.category}
                 subCategory={item.subCategory}
-                percent={item.value}
+                percent={item.percentage}
               />
             ))}
           </S.GradeList>

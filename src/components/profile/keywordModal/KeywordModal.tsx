@@ -6,6 +6,7 @@ import TabBar from './TabBar';
 import { useEffect, useState } from 'react';
 import Subcategory from '../../common/subcategory/Subcategory';
 import { CATEGORIES } from '../../../constants/Category';
+import { putKeywords } from '../../../api/Profile';
 
 interface KeywordModalProps {
   onClose: () => void;
@@ -20,11 +21,22 @@ const KeywordModal = ({ onClose }: KeywordModalProps) => {
   };
 
   const handleKeywordToggle = (keyword: string) => {
-    setIsActives((prevIsActives) =>
-      prevIsActives.includes(keyword)
+    setIsActives((prevIsActives) => {
+      const updated = prevIsActives.includes(keyword)
         ? prevIsActives.filter((item) => item !== keyword)
-        : [...prevIsActives, keyword],
-    );
+        : [...prevIsActives, keyword];
+      return updated;
+    });
+  };
+
+  const handleSubmit = async () => {
+    if (isError) null;
+    else {
+      const response = await putKeywords(isActives);
+      if (response) {
+        onClose();
+      }
+    }
   };
 
   useEffect(() => {
@@ -60,12 +72,7 @@ const KeywordModal = ({ onClose }: KeywordModalProps) => {
           <Button buttonStyle="profile" onClick={onClose}>
             취소
           </Button>
-          <Button
-            buttonStyle="modal"
-            onClick={() => {
-              console.log('구현해야함');
-            }}
-          >
+          <Button buttonStyle="modal" onClick={handleSubmit}>
             적용
           </Button>
         </S.ButtonContainer>

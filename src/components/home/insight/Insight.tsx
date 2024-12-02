@@ -1,35 +1,25 @@
+import { useEffect, useState } from 'react';
 import * as S from './Insight.Style';
 import Item from './Item';
+import { getInsight } from '../../../api/Main';
 
-const MOCK_DATA = [
-  {
-    category: '사회',
-    title: '우리나라 무역 강화',
-    newsId: 1,
-  },
-  {
-    category: '사회',
-    title: '우리나라 무역 강화',
-    newsId: 2,
-  },
-  {
-    category: '사회',
-    title: '우리나라 무역 강화',
-    newsId: 3,
-  },
-  {
-    category: '사회',
-    title: '우리나라 무역 강화',
-    newsId: 4,
-  },
-  {
-    category: '사회',
-    title: '우리나라 무역 강화',
-    newsId: 5,
-  },
-];
+interface InsightProps {
+  topic: string;
+  category: string;
+  basenewsId: number;
+}
 
 const Insight = () => {
+  const [insight, setInsight] = useState<InsightProps[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const insightData = await getInsight();
+      setInsight(insightData);
+    };
+    fetchData();
+  }, []);
+
   return (
     <S.Container>
       <S.TextContainer>
@@ -39,12 +29,12 @@ const Insight = () => {
         </S.Description>
       </S.TextContainer>
       <S.Insight>
-        {MOCK_DATA.map((item) => (
+        {insight.map((item) => (
           <Item
-            key={item.newsId}
+            key={item.basenewsId}
             category={item.category}
-            title={item.title}
-            newsId={item.newsId}
+            title={item.topic}
+            newsId={item.basenewsId}
           />
         ))}
       </S.Insight>

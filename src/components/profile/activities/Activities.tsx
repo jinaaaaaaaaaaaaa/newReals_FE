@@ -4,15 +4,19 @@ import Quiz from './quiz/Quiz';
 import Scrap from './scrap/Scrap';
 import * as S from './Activites.Style';
 
-const Activities = () => {
+interface ActivitesProps {
+  name: string;
+}
+
+const Activities = ({ name }: ActivitesProps) => {
   return (
     <S.MyActivities>
       <S.RightHead>
-        <AnalysisCard nickname="김뉴스" />
+        <AnalysisCard nickname={name} />
         <Quiz />
       </S.RightHead>
       <Insight />
-      <Scrap />
+      <Scrap nickname={name} />
     </S.MyActivities>
   );
 };

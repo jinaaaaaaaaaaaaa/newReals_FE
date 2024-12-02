@@ -2,62 +2,42 @@ import { useState } from 'react';
 import * as S from './Interest.Style';
 import Bubble from './Bubble';
 import Count from './Count';
+import { CategoryData, CategoryKey } from '../type/Report';
 
-const MOCK_DATA = [
-  { category: '정치', percent: 30 },
-  { category: '경제', percent: 30 },
-  { category: '사회', percent: 30 },
-];
+interface InterestProps {
+  month: number;
+  interest: Record<CategoryKey, CategoryData[]>;
+}
 
-type CategoryKey = '정치' | '경제' | '사회';
-
-type CategoryData = {
-  quiz: number;
-  insight: number;
-  scrap: number;
-};
-
-type MockDataType = Record<CategoryKey, CategoryData>;
-
-// MOCK 데이터 정의
-const MOCK_DATA2: MockDataType = {
-  정치: { quiz: 5, insight: 5, scrap: 10 },
-  경제: { quiz: 5, insight: 5, scrap: 10 },
-  사회: { quiz: 5, insight: 5, scrap: 10 },
-};
-
-const Interest = () => {
-  const [selectCategory, setSelectCategory] = useState<CategoryKey>('정치');
-
-  const getCategoryData = (category: CategoryKey): CategoryData | null => {
-    return MOCK_DATA2[category] || null;
-  };
-
-  const currentCategoryData = getCategoryData(selectCategory);
+const Interest = ({ month, interest }: InterestProps) => {
+  const [selectCategory, setSelectCategory] = useState<CategoryKey>('사회');
+  const currentCategoryData = interest[selectCategory]?.[0];
 
   return (
     <S.Container>
-      <S.Title>11월 관심도 분석</S.Title>
+      <S.Title>{month}월 관심도 분석</S.Title>
       <S.Description>* 각 카테고리를 클릭해 활동량을 확인해보세요!</S.Description>
       <S.Analysis>
         <S.Bubbles>
-          {MOCK_DATA.map((item) => (
+          {Object.entries(interest).map(([category, data]) => (
             <Bubble
-              key={item.category}
-              isSelected={selectCategory === item.category}
-              category={item.category}
-              percent={item.percent}
-              onClick={() => setSelectCategory(item.category as CategoryKey)}
+              key={category}
+              isSelected={selectCategory === category}
+              category={category}
+              percent={data[0]?.percentage || 0}
+              onClick={() => setSelectCategory(category as CategoryKey)}
             />
           ))}
         </S.Bubbles>
         <S.Content>
           <S.Text>{selectCategory} 카테고리에서는 다음과 같이 활동했어요.</S.Text>
           <S.Chips>
-            {currentCategoryData &&
-              Object.entries(currentCategoryData).map(([key, value]) => (
-                <Count key={key} chip={key} count={value} />
-              ))}
+            <S.Chips>
+              {currentCategoryData &&
+                Object.entries(currentCategoryData)
+                  .filter(([key]) => key !== 'percentage')
+                  .map(([key, value]) => <Count key={key} chip={key} count={value} />)}
+            </S.Chips>
           </S.Chips>
         </S.Content>
       </S.Analysis>

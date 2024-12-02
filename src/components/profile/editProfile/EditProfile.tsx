@@ -80,7 +80,9 @@ const EditProfile = ({ name, image, onClose }: EditProfileProps) => {
         user.name !== name ? user.name : undefined,
         typeof user.image !== 'string' ? (user.image as File) : undefined,
       );
-      alert(response.message); // 토스트 알림이나 다른 부분으로 변경하기
+      if (response) {
+        localStorage.setItem('nickname', response);
+      }
       onClose();
     } catch (error) {
       console.error(error);

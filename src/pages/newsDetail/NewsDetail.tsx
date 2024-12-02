@@ -1,73 +1,237 @@
-import { useState } from 'react';
-import AnswerModal from '../../components/newsDetail/quiz/AnswerModal';
+import { useEffect, useState } from 'react';
 import EmojiPart from '../../components/newsDetail/emojipart/EmojiPart';
 import ArticleHeader from '../../components/newsDetail/articleHeader/ArticleHeader';
 import * as S from './NewsDetail.Style';
 import AIPart from '../../components/newsDetail/aiPart/AIPart';
 import PageButton from '../../components/common/button/PageButton';
 import Quiz from '../../components/newsDetail/quiz/Quiz';
-import PoliticsImg1 from '../../assets/images/PoliticsImg1.png';
 import ThinkingPart from '../../components/newsDetail/thinkingPart/ThinkingPart';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import {
+  getDetailInsight,
+  getDetailLikes,
+  getDetailNews,
+  getDetailQuiz,
+} from '../../api/NewsDetail';
+import Loading from '../../components/common/Loading/Loding';
 
-const MOCKDATA = {
-  id: 1,
-  category: '정치',
-  subCategory: '행정',
-  keyword: '키워드',
-  date: '2024-11-10',
-  title: '집값 상승에 가계 여유자금 줄어... 예금보다 부동산에 투자 늘어...1',
-  count: 46,
-  img: PoliticsImg1,
-  content:
-    '윤석열 대통령은 필리핀을 국빈 방문해 무역, 투자, 공급망, 에너지 등 다양한 분야에서 협력을 강화하겠다고 했어요. 그는 필리핀과의 관계 발전이 동포 사회에 이익이 될 것이라고 했고, 필리핀 대통령과 정상회담을 열어 양국 간 협력을 논의할 예정이에요. 또한, 비즈니스 포럼을 개최하고, 싱가포르와 라오스를 순방해 아세안 정상회의에 참석할 계획이에요. 윤석열 대통령은 필리핀을 국빈 방문해 무역, 투자, 공급망, 에너지 등 다양한 분야에서 협력을 강화하겠다고 했어요. 그는 필리핀과의 관계 발전이 동포 사회에 이익이 될 것이라고 했고, 필리핀 대통령과 정상회담을 열어 양국 간 협력을 논의할 예정이에요. 또한, 비즈니스 포럼을 개최하고, 싱가포르와 라오스를 순방해 아세안 정상회의에 참석할 계획이에요.',
-  dictionary: {
-    필리핀: '저도몰라요',
-    국빈: '국제적으로 머..암튼 그런거에요랄라라라라라라국빈국빈국빈해요',
-    포럼: '안녕하세요저는김진아포럼은영어포도포도포도포럼포럼해요 이 문맥에서는 이게 이런 뜻이고 이런 말이에요',
-  },
-  url: 'https://www.breaknews.com/1060642',
-  topic: '"우리나라 무역 강화"에 대해 어떻게 생각하시나요?',
-  quiz: '가계의 순자금운용이 줄어든 이유는 주택담보대출 등 금융 기관 차입이 감소했기 때문이다.',
-  comment: '이게해설이에요',
-  left: '북한 오물풍선',
-  right: '의료 대란 논의',
-};
+interface NewsDataProps {
+  id: number;
+  category: string;
+  subCategory: string;
+  keyword: string;
+  title: string;
+  summary: string;
+  description: string;
+  imageUrl: string;
+  newsUrl: string;
+  uploadDate: string;
+  scrapped: boolean;
+  good: number;
+  bad: number;
+  interesting: number;
+  totalLikes: number;
+  viewCount: number;
+  termMap: Record<string, string>;
+  wherePageFrom: string;
+  reactionType: number;
+}
+
+interface SideNewsProps {
+  basenewsID: number;
+  title: string;
+}
+
+interface QuizDataProps {
+  problem: string;
+  answer: boolean;
+  comment: string;
+  solved: boolean;
+}
+
+interface InsightDataProps {
+  topic: string;
+  userComment: string;
+  aiComment: string;
+  pros: string;
+  cons: string;
+  neutral: string;
+}
+
+interface LikesDataProps {
+  reactionType: number;
+  good: number;
+  bad: number;
+  interesting: number;
+}
 
 const NewsDetail = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { id } = useParams();
+  const location = useLocation();
+  const { state: locationProp } = location;
+  const navigate = useNavigate();
+  const [newsData, setNewsData] = useState<NewsDataProps | null>(null);
+  const [prevNews, setPrevNews] = useState<SideNewsProps | null>(null);
+  const [nextNews, setNextNews] = useState<SideNewsProps | null>(null);
+  const [quizData, setQuizData] = useState<QuizDataProps | null>(null);
+  const [insightData, setInsightData] = useState<InsightDataProps | null>(null);
+  const [likesData, setLikesData] = useState<LikesDataProps | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleModal = () => {
-    setIsOpen((prev) => !prev);
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const [news, quiz, insight, likes] = await Promise.all([
+          // 함수들을 병렬적으로 동시에 실행
+          getDetailNews(Number(id), locationProp),
+          getDetailQuiz(Number(id)),
+          getDetailInsight(Number(id)),
+          getDetailLikes(Number(id)),
+        ]);
+
+        if (news) {
+          setNewsData(news);
+          setPrevNews(news.prevNews);
+          setNextNews(news.nextNews);
+        }
+        if (quiz) setQuizData(quiz);
+        if (insight) setInsightData(insight);
+        if (likes) setLikesData(likes);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      } finally {
+        setIsLoading(false); // 로딩 상태 종료
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  const handleInsightUpdate = async () => {
+    const updatedInsight = await getDetailInsight(Number(id));
+    if (updatedInsight) setInsightData(updatedInsight);
   };
+
+  const handleQuizUpdate = async () => {
+    const updatedQuiz = await getDetailQuiz(Number(id));
+    if (updatedQuiz) setQuizData(updatedQuiz);
+  };
+
+  const getStateData = (): { category?: string; keyword?: string; subCategory?: string } | null => {
+    if (!newsData || !newsData.wherePageFrom) {
+      console.error('newsData 또는 wherePageFrom이 유효하지 않습니다.');
+      return null;
+    }
+    type WherePageFrom = 'category' | 'keyword' | 'subCategory';
+    const mapping: Record<
+      WherePageFrom,
+      { category?: string; keyword?: string; subCategory?: string }
+    > = {
+      category: { category: newsData.category },
+      keyword: { keyword: newsData.keyword },
+      subCategory: { subCategory: newsData.subCategory },
+    };
+
+    const stateData = mapping[newsData.wherePageFrom as WherePageFrom];
+
+    if (!stateData) {
+      console.warn(`wherePageFrom 값 "${newsData.wherePageFrom}"에 대한 매핑이 없습니다.`);
+      return null;
+    }
+    return stateData;
+  };
+
+  const handleSideNewsClick = (id: number) => {
+    const stateData = getStateData();
+    navigate(`/newsDetail/${id}`, { state: stateData });
+  };
+
   return (
-    <S.NewsDetail>
-      <ArticleHeader
-        category={MOCKDATA.category}
-        subCategory={MOCKDATA.subCategory}
-        keyword={MOCKDATA.keyword}
-        title={MOCKDATA.title}
-        date={MOCKDATA.date}
-        count={MOCKDATA.count}
-      />
-      <S.Content>
-        <S.NewsPart>
-          <S.NewsImg src={MOCKDATA.img} />
-          <AIPart />
-          {MOCKDATA.topic ? <ThinkingPart topic={MOCKDATA.topic} /> : <EmojiPart />}
-          <button onClick={handleModal}>Show Answer Modal</button>
-          {isOpen && <AnswerModal isCorrect={true} onClose={handleModal} />}
-          <S.PageNavigate>
-            <PageButton children={MOCKDATA.left} buttonStyle="left" />
-            <PageButton children={MOCKDATA.right} buttonStyle="right" />
-          </S.PageNavigate>
-        </S.NewsPart>
-        {MOCKDATA.quiz && (
-          <S.QuizPart>
-            <Quiz quiz={MOCKDATA.quiz} isSolved={false} answer={true} comment={MOCKDATA.comment} />
-          </S.QuizPart>
+    <div>
+      {isLoading && <Loading message="페이지 로딩중입니다" />}
+      <S.NewsDetail>
+        {newsData && (
+          <>
+            <ArticleHeader
+              id={newsData.id}
+              category={newsData.category}
+              subCategory={newsData.subCategory}
+              keyword={newsData.keyword}
+              title={newsData.title}
+              date={newsData.uploadDate}
+              count={newsData.totalLikes}
+              isScrapped={newsData.scrapped}
+            />
+            <S.Content>
+              <S.NewsPart>
+                {newsData.imageUrl && <S.NewsImg src={newsData.imageUrl} />}
+                <AIPart
+                  summary={newsData.summary}
+                  description={newsData.description}
+                  termMap={newsData.termMap}
+                  newsUrl={newsData.newsUrl}
+                />
+                {insightData ? (
+                  <ThinkingPart
+                    topic={insightData.topic}
+                    userComment={insightData.userComment}
+                    aiComment={insightData.aiComment}
+                    pros={insightData.pros}
+                    cons={insightData.cons}
+                    neutral={insightData.neutral}
+                    onCommentUpdated={handleInsightUpdate}
+                  />
+                ) : likesData ? (
+                  <EmojiPart
+                    id={newsData.id}
+                    action={likesData.reactionType}
+                    good={likesData.good}
+                    bad={likesData.bad}
+                    interesting={likesData.interesting}
+                  />
+                ) : null}
+                <S.PageNavigate>
+                  <div>
+                    {prevNews && (
+                      <PageButton
+                        children={prevNews.title}
+                        buttonStyle="left"
+                        onClick={() => {
+                          handleSideNewsClick(prevNews.basenewsID);
+                        }}
+                      />
+                    )}
+                  </div>
+                  <div>
+                    {nextNews && (
+                      <PageButton
+                        children={nextNews.title}
+                        buttonStyle="right"
+                        onClick={() => {
+                          handleSideNewsClick(nextNews.basenewsID);
+                        }}
+                      />
+                    )}
+                  </div>
+                </S.PageNavigate>
+              </S.NewsPart>
+              {quizData && (
+                <S.QuizPart>
+                  <Quiz
+                    quiz={quizData.problem}
+                    isSolved={quizData.solved}
+                    answer={quizData.answer}
+                    comment={quizData.comment}
+                    onCommentUpdated={handleQuizUpdate}
+                  />
+                </S.QuizPart>
+              )}
+            </S.Content>
+          </>
         )}
-      </S.Content>
-    </S.NewsDetail>
+      </S.NewsDetail>
+    </div>
   );
 };
 

@@ -3,40 +3,60 @@ import GoodEmoji from '../../../assets/icons/GoodEmoji.svg';
 import HeartEmoji from '../../../assets/icons/HeartEmoji.svg';
 import AngryEmoji from '../../../assets/icons/AngryEmoji.svg';
 import IconPart from './IconPart';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { sendLikes } from '../../../api/NewsDetail';
 
-const ICONS = [
-  { id: 1, imoji: GoodEmoji, content: '좋아요', count: 52 },
-  { id: 2, imoji: HeartEmoji, content: '공감해요', count: 54 },
-  { id: 3, imoji: AngryEmoji, content: '화나요', count: 0 },
-];
+interface EmojiProps {
+  id: number;
+  action: number;
+  good: number;
+  bad: number;
+  interesting: number;
+}
 
-const EmojiPart = () => {
+const EmojiPart = ({ id, action, good, bad, interesting }: EmojiProps) => {
+  const ICONS = [
+    { id: 0, imoji: GoodEmoji, content: '좋아요' },
+    { id: 1, imoji: HeartEmoji, content: '공감해요' },
+    { id: 2, imoji: AngryEmoji, content: '화나요' },
+  ];
   const [selectedIcon, setSelectedIcon] = useState<number | null>(null);
-  const [likeCounts, setLikeCounts] = useState<Record<number, number>>(
-    ICONS.reduce((acc, icon) => ({ ...acc, [icon.id]: icon.count ?? 0 }), {}),
-  );
+  const [likeCounts, setLikeCounts] = useState<Record<number, number>>({
+    0: 0,
+    1: 0,
+    2: 0,
+  });
 
-  const handleIconClick = (id: number) => {
-    setSelectedIcon((prev) => {
-      // 이전 선택된 이모지가 있다면, 카운트를 감소시킵니다
-      if (prev !== null) {
-        setLikeCounts((counts) => ({
-          ...counts,
-          [prev]: counts[prev] - 1,
-        }));
-      }
-      // 새로 선택된 이모지가 같으면 선택 해제, 다르면 카운트 증가
-      if (prev === id) {
-        return null;
-      } else {
-        setLikeCounts((counts) => ({
-          ...counts,
-          [id]: counts[id] + 1,
-        }));
-        return id;
-      }
+  useEffect(() => {
+    setSelectedIcon(action); // 선택된 이모지 초기화
+    setLikeCounts({
+      0: good,
+      1: interesting,
+      2: bad,
     });
+  }, [id, action, good, bad, interesting]);
+
+  const handleClickLikeButton = async (selectedId: number) => {
+    try {
+      const isSuccess = await sendLikes(Number(id), selectedId);
+      if (isSuccess) {
+        setLikeCounts((counts) => {
+          const updatedCounts = { ...counts };
+          if (selectedIcon !== null) {
+            updatedCounts[selectedIcon] -= 1;
+          }
+          if (selectedIcon !== selectedId) {
+            updatedCounts[selectedId] += 1;
+            setSelectedIcon(selectedId);
+          } else {
+            setSelectedIcon(null);
+          }
+          return updatedCounts;
+        });
+      }
+    } catch (error) {
+      console.error('오류 발생:', error);
+    }
   };
 
   return (
@@ -51,7 +71,7 @@ const EmojiPart = () => {
               content={icon.content}
               count={likeCounts[icon.id]}
               isSelected={selectedIcon === icon.id}
-              onClick={() => handleIconClick(icon.id)}
+              onClick={() => handleClickLikeButton(icon.id)}
             />
           ))}
         </S.ClickPart>

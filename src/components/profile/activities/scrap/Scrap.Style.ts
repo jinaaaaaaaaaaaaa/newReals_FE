@@ -4,19 +4,20 @@ import { Colors, FontStyles } from '../../../../styles';
 export const ScrapContent = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 1.25rem;
-`;
-
-export const ScrapHead = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
 `;
 
 export const Text = styled.span`
   ${FontStyles.LG_Bold}
   color : ${Colors.Grayscale90};
+`;
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
 `;
 
 export const CardList = styled.div`

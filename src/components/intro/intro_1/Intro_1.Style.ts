@@ -14,7 +14,7 @@ export const Purple = styled.span`
 
 export const Slogan = styled.p`
   color: ${Colors.Grayscale90};
-  font-family: Syncopate; // 적용 안되는것같다
+  font-family: 'Syncopate';
   font-size: 36px;
   font-style: normal;
   font-weight: 700;
