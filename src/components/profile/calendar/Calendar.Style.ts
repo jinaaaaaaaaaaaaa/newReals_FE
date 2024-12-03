@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Colors, FontStyles } from '../../../styles';
-import CalendarCoin from '../../../assets/icons/CalendarCoinIcon.svg';
-import CalendarNoCoin from '../../../assets/icons/CalendarNoCoinIcon.svg';
+import CalendarCoin from '../../../assets/icons/CalendarCoinIcon.svg?url';
+import CalendarNoCoin from '../../../assets/icons/CalendarNoCoinIcon.svg?url';
 
 export const Container = styled.div`
   width: 21.6875rem;
