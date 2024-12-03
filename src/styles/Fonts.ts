@@ -31,6 +31,12 @@ const Fonts = css`
     font-style: normal;
     src: url('/fonts/Pretendard-Bold.woff') format('woff');
   }
+  @font-face {
+    font-family: 'Syncopate';
+    src: url('/fonts/Syncopate-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+  }
 `;
 
 export default Fonts;

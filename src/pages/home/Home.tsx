@@ -1,16 +1,17 @@
 import * as S from './Home.Style';
-
 import HeadNews from '../../components/common/headNews/HeadNews';
 import { useEffect, useState } from 'react';
 import LatestNews from '../../components/home/latestNews/LatestNews';
 import Insight from '../../components/home/insight/Insight';
-import { getDailyNews } from '../../api/Main';
+import { getAttendance, getDailyNews, patchAttendance } from '../../api/Main';
 import { DailyNewsProps } from '../../types/newsType';
+import CoinModal from '../../components/common/coinModal/CoinModal';
 
 const Home = () => {
   const [dailyNews, setDailyNews] = useState<DailyNewsProps[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleNextNews = () => {
     if (dailyNews.length > 0) {
@@ -26,6 +27,17 @@ const Home = () => {
 
   const togglePause = () => {
     setIsPaused((prev) => !prev);
+  };
+
+  const toggleModal = () => {
+    setOpenModal((prev) => !prev);
+  };
+
+  const handleClickModal = async () => {
+    const message = await patchAttendance();
+    if (message) {
+      setOpenModal(false); // 이 부분 나중에 토스트로 구현해도 좋을 듯 !
+    }
   };
 
   useEffect(() => {
@@ -46,6 +58,16 @@ const Home = () => {
       }
     };
     fetchDailyNews();
+  }, []);
+
+  useEffect(() => {
+    const fetchAttendance = async () => {
+      const response = await getAttendance();
+      if (!response.attendance) {
+        setOpenModal(true);
+      }
+    };
+    fetchAttendance();
   }, []);
 
   return (
@@ -72,6 +94,14 @@ const Home = () => {
         <Insight />
         <LatestNews />
       </S.Container>
+      {openModal && (
+        <CoinModal
+          onClose={toggleModal}
+          text="출석을 하고 코인을 획득했어요!"
+          coin={5}
+          onClick={handleClickModal}
+        />
+      )}
     </>
   );
 };

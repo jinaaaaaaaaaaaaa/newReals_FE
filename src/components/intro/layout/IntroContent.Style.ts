@@ -1,7 +1,11 @@
 import styled from 'styled-components';
-import { Colors, FontStyles } from '../../styles';
+import { Colors, FontStyles } from '../../../styles';
 
-export const MentPart = styled.div``;
+export const MentPart = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+`;
 
 export const FirstMent = styled.p`
   color: ${Colors.Main50};
@@ -13,6 +17,7 @@ export const SecondMent = styled.p`
 `;
 
 export const ThirdMent = styled.p`
+  margin-top: 0.5rem;
   color: ${Colors.Grayscale70};
   ${FontStyles.MD2_Regular}
 `;

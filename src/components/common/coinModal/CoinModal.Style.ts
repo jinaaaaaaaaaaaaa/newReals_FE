@@ -17,7 +17,7 @@ const slideDown = keyframes`
 `;
 
 export const AnimatedImage = styled.img`
-  animation: ${slideDown} 2s ease-in-out forwards;
+  animation: ${slideDown} 2s ease-in-out infinite;
   position: absolute;
   top: 0;
   left: 0;

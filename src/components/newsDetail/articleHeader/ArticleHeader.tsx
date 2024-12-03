@@ -30,9 +30,9 @@ const ArticleHeader = ({
 
   const handleSelected = async () => {
     try {
-      const success = await postScrap(id); // 스크랩 등록/해제 API 호출
-      if (success !== null) {
-        setIsSelected(success); // 성공적으로 변경된 상태 반영
+      const success = await postScrap(id);
+      if (success) {
+        setIsSelected((prev) => !prev);
       }
     } catch (error) {
       console.error('스크랩 실패:', error);

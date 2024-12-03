@@ -61,3 +61,41 @@ export const getKeywordNews = async (keywordIndex: number | null, page: number) 
     console.error(error);
   }
 };
+
+/**
+ * 출석 확인 조회
+ * @returns
+ */
+export const getAttendance = async () => {
+  try {
+    const response = await api.get('/accounts/attendance/check', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (response.data.success) {
+      return response.data.data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
+ * 출석 버튼 클릭
+ * @returns
+ */
+export const patchAttendance = async () => {
+  try {
+    const response = await api.patch('/accounts/attendance/mark', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (response.data.success) {
+      return response.data.message;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};

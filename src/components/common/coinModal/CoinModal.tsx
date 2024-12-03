@@ -9,6 +9,7 @@ interface CoinModal {
   onClose: () => void;
   text: string;
   coin: number;
+  onClick: () => void;
 }
 
 /**
@@ -16,9 +17,10 @@ interface CoinModal {
  * @param onClose - 모달에 수행할 함수
  * @param text - 코인을 얻을 때 멘트
  * @param coin - 얻은 코인의 수
+ * @param onClick - 버튼을 클릭하면 수행할 함수
  * @returns
  */
-const CoinModal = ({ onClose, text, coin }: CoinModal) => {
+const CoinModal = ({ onClose, text, coin, onClick }: CoinModal) => {
   return (
     <Modal onClose={onClose}>
       <S.Modal>
@@ -31,7 +33,7 @@ const CoinModal = ({ onClose, text, coin }: CoinModal) => {
           <S.CoinText>{coin}코인 획득!</S.CoinText>
           <S.Text>{text}</S.Text>
         </S.Content>
-        <Button buttonStyle="modal" onClick={onClose}>
+        <Button buttonStyle="modal" onClick={onClick}>
           확인
         </Button>
       </S.Modal>
