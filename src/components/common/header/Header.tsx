@@ -15,6 +15,17 @@ const Header = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
+  const kakaoRestKey = import.meta.env.VITE_KAKAO_REST_KEY;
+  const redirectUri = import.meta.env.VITE_KAKAO_REDIRECT_URI;
+
+  // 카카오 OAuth URL 생성
+  const kauthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoRestKey}&redirect_uri=${redirectUri}&response_type=code`;
+
+  // 로그인 버튼 클릭 핸들러
+  const handleLoginClick = () => {
+    window.location.href = kauthUrl;
+  };
+
   if (pathname === '/register') return null;
 
   return (
@@ -25,7 +36,7 @@ const Header = () => {
         alt="Logo"
       />
       {pathname === '/' ? (
-        <S.LoginPart>
+        <S.LoginPart onClick={handleLoginClick}>
           <S.LoginImg src={PeopleIcon} alt="LoginIcon" />
           <S.Login>로그인 / 회원가입</S.Login>
         </S.LoginPart>
