@@ -99,7 +99,7 @@ const Category = () => {
 
       <S.Container>
         <S.TextContainer>
-          <S.Title>{category} 뉴스 돌아보기</S.Title>
+          <S.Title>{categoryMap[category]} 뉴스 돌아보기</S.Title>
           <S.Description>카테고리 선택으로 뉴스를 검색해 보세요.</S.Description>
         </S.TextContainer>
         <TabBar type={category} selectedItem={selectSubCategory} onClick={handleCategory} />

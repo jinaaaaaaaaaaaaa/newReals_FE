@@ -58,6 +58,7 @@ export const Unanswered = styled.div`
   border-radius: 1.625rem;
   background-color: ${Colors.Grayscale10};
   color: ${Colors.Grayscale30};
+  cursor: pointer;
 `;
 
 export const Number = styled.span`

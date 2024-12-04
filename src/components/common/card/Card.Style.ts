@@ -9,6 +9,7 @@ export const ImageCard = styled.div`
   max-width: 21.6875rem;
   height: 17.375rem;
   gap: 1rem;
+  cursor: pointer;
 `;
 
 export const Image = styled.img`
@@ -34,6 +35,7 @@ export const Card = styled.div`
   background-color: ${Colors.Main0};
   border-radius: 1rem;
   border: 1px solid ${Colors.Grayscale10};
+  cursor: pointer;
 `;
 
 export const Category = styled.div`

@@ -20,7 +20,7 @@ const PageNation = ({ totalPages, currentPage, onPageChange }: PageNationProps) 
 
   return (
     <S.PageNation>
-      <img
+      <S.Arrow
         src={LeftArrowIcon}
         alt="이전 버튼"
         onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
@@ -36,7 +36,7 @@ const PageNation = ({ totalPages, currentPage, onPageChange }: PageNationProps) 
         </S.PageNumber>
       ))}
 
-      <img
+      <S.Arrow
         src={RigthArrowIcon}
         alt="다음 버튼"
         onClick={() => onPageChange(Math.min(currentPage + 1, totalPages))}

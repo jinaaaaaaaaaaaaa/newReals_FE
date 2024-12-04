@@ -9,4 +9,5 @@ export const Chip = styled.div<{ $isSelected: boolean; $size?: 'small' | 'large'
   border: 1px solid ${({ $isSelected }) => ($isSelected ? Colors.Main50 : 'none')};
   background-color: ${({ $isSelected }) => ($isSelected ? Colors.Main5 : Colors.Grayscale5)};
   color: ${({ $isSelected }) => ($isSelected ? Colors.Main50 : Colors.Grayscale50)};
+  cursor: pointer;
 `;

@@ -23,4 +23,5 @@ export const GoToNews = styled.div`
   gap: 0.0375rem;
   align-items: center;
   color: ${Colors.Grayscale50};
+  cursor: pointer;
 `;

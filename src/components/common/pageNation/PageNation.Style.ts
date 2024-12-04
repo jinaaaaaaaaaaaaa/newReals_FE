@@ -20,3 +20,7 @@ export const PageNumber = styled.div<{ $isActive: boolean }>`
   color: ${({ $isActive }) => ($isActive ? Colors.Main0 : Colors.Grayscale90)};
   cursor: pointer;
 `;
+
+export const Arrow = styled.img`
+  cursor: pointer;
+`;

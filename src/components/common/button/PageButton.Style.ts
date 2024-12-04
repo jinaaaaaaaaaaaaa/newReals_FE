@@ -22,7 +22,14 @@ export const PageButton = styled.button<{ $buttonStyle: 'left' | 'right' }>`
     $buttonStyle === 'right' ? 'space-between' : 'flex-start'};
   gap: ${({ $buttonStyle }) => ($buttonStyle === 'left' ? '0.75rem' : '0')};
 
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  .icon {
+    flex-shrink: 0; // 아이콘 크기를 고정
+  }
+
+  .text {
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 `;

@@ -17,9 +17,17 @@ interface PageButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
 const PageButton = ({ children, buttonStyle, ...props }: PageButtonProps) => {
   return (
     <S.PageButton $buttonStyle={buttonStyle} {...props}>
-      {buttonStyle === 'left' && <LeftArrowIcon />}
-      {children}
-      {buttonStyle === 'right' && <RightArrowIcon />}
+      {buttonStyle === 'left' && (
+        <span className="icon">
+          <LeftArrowIcon />
+        </span>
+      )}
+      <span className="text">{children}</span>
+      {buttonStyle === 'right' && (
+        <span className="icon">
+          <RightArrowIcon />
+        </span>
+      )}
     </S.PageButton>
   );
 };
