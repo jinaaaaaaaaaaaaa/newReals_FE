@@ -26,7 +26,7 @@ const Scrap = ({ nickname }: ScrapProps) => {
   };
 
   const handleCardClick = (id: number) => {
-    navigate(`/news/${id}`);
+    navigate(`/newsDetail/${id}`);
   };
 
   const handlePageChange = (page: number) => {
