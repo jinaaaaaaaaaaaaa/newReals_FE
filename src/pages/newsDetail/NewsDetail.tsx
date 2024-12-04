@@ -81,6 +81,10 @@ const NewsDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
+
+      setInsightData(null);
+      setQuizData(null);
+      setLikesData(null);
       try {
         const [news, quiz, insight, likes] = await Promise.all([
           // 함수들을 병렬적으로 동시에 실행
@@ -193,23 +197,23 @@ const NewsDetail = () => {
                 ) : null}
                 <S.PageNavigate>
                   <div>
-                    {prevNews && (
+                    {nextNews && (
                       <PageButton
-                        children={prevNews.title}
+                        children={nextNews.title}
                         buttonStyle="left"
                         onClick={() => {
-                          handleSideNewsClick(prevNews.basenewsID);
+                          handleSideNewsClick(nextNews.basenewsID);
                         }}
                       />
                     )}
                   </div>
                   <div>
-                    {nextNews && (
+                    {prevNews && (
                       <PageButton
-                        children={nextNews.title}
+                        children={prevNews.title}
                         buttonStyle="right"
                         onClick={() => {
-                          handleSideNewsClick(nextNews.basenewsID);
+                          handleSideNewsClick(prevNews.basenewsID);
                         }}
                       />
                     )}

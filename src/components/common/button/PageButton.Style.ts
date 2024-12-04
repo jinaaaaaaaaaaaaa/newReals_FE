@@ -21,4 +21,8 @@ export const PageButton = styled.button<{ $buttonStyle: 'left' | 'right' }>`
   justify-content: ${({ $buttonStyle }) =>
     $buttonStyle === 'right' ? 'space-between' : 'flex-start'};
   gap: ${({ $buttonStyle }) => ($buttonStyle === 'left' ? '0.75rem' : '0')};
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
