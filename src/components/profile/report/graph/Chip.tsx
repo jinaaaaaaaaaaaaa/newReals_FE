@@ -8,7 +8,7 @@ interface ChipProps {
 const typeText = {
   quiz: '퀴즈',
   attendance: '출석',
-  insight: '생각거리',
+  insight: '인사이트',
 };
 
 const Chip = ({ type, count }: ChipProps) => {
