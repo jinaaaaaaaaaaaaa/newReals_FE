@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Colors, FontStyles } from '../../../styles';
-import InfoIcon from '../../../assets/icons/InfoIcon.svg?react';
+import ErrorIcon from '../../../assets/icons/ErrorIcon.svg?react';
 
 export const Modal = styled.div`
   width: 26.25rem;
@@ -28,6 +28,14 @@ export const ButtonContainer = styled.div`
   padding: 1rem 1.25rem;
 `;
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 23rem;
+  padding: 1.25rem;
+  gap: 1.25rem;
+`;
+
 export const HelperTextContainer = styled.div`
   display: flex;
   gap: 0.375rem;
@@ -38,7 +46,7 @@ export const HelperText = styled.p<{ $isError: boolean }>`
   color : ${({ $isError }) => ($isError ? Colors.Red : Colors.Grayscale50)};
 `;
 
-export const Icon = styled(InfoIcon)<{ $isError: boolean }>`
+export const Icon = styled(ErrorIcon)<{ $isError: boolean }>`
   width: 1.25rem;
   height: 1.25rem;
   color: ${({ $isError }) => ($isError ? Colors.Red : Colors.Grayscale50)};
@@ -47,9 +55,7 @@ export const Icon = styled(InfoIcon)<{ $isError: boolean }>`
 export const Categories = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1.25rem;
-  gap: 1.25rem;
-  height: 23rem;
+  height: 100%;
   overflow: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;

@@ -35,7 +35,6 @@ const LatestNews = () => {
         setBaseNewsList(newsData.baseNewsList);
         setTotalPage(newsData.totalPage);
       }
-      console.log(newsData);
     };
     fetchData();
   }, [currentKeyword, currentPage]);

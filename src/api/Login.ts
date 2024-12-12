@@ -36,6 +36,7 @@ export const getAccessToken = async () => {
     const response = await api.post('/accounts/token/refresh', {
       headers: {
         Authorization: `Bearer ${refreshToken}`,
+        'Content-Type': 'application/json',
       },
     });
     if (response.data.success) {

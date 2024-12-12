@@ -52,22 +52,24 @@ const KeywordModal = ({ onClose }: KeywordModalProps) => {
         </S.Header>
         <TabBar category={category} onClick={handleClickCategory} />
 
-        <S.Categories>
+        <S.Container>
           <S.HelperTextContainer>
             <S.Icon $isError={isError} />
             <S.HelperText $isError={isError}>키워드는 최대 5개까지만 선택이 가능해요</S.HelperText>
           </S.HelperTextContainer>
-          {CATEGORIES[category] &&
-            Object.entries(CATEGORIES[category]).map(([subcategory, keywords]) => (
-              <Subcategory
-                key={subcategory}
-                data={{ [subcategory]: keywords }}
-                isActives={isActives}
-                onToggleKeyword={handleKeywordToggle}
-                type="modal"
-              />
-            ))}
-        </S.Categories>
+          <S.Categories>
+            {CATEGORIES[category] &&
+              Object.entries(CATEGORIES[category]).map(([subcategory, keywords]) => (
+                <Subcategory
+                  key={subcategory}
+                  data={{ [subcategory]: keywords }}
+                  isActives={isActives}
+                  onToggleKeyword={handleKeywordToggle}
+                  type="modal"
+                />
+              ))}
+          </S.Categories>
+        </S.Container>
         <S.ButtonContainer>
           <Button buttonStyle="profile" onClick={onClose}>
             취소

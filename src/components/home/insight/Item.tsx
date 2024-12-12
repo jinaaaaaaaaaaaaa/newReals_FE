@@ -26,7 +26,8 @@ const Item = ({ category, title, newsId }: ItemProps) => {
   return (
     <S.Item>
       <S.TitleContainer>
-        <Tag color="purple">{category}</Tag>"{title}"에 대해 어떻게 생각하시나요?
+        <Tag color="purple">{category}</Tag>
+        {title}
       </S.TitleContainer>
       <S.GoToNews onClick={goToNews}>
         뉴스 보러 가기

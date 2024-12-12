@@ -68,7 +68,11 @@ const Profile = () => {
               </Chip>
             ))}
           </S.ChipContainer>
-          {selectedChip === '나의 활동' ? <Activities name={user.name} /> : <Report />}
+          {selectedChip === '나의 활동' ? (
+            <Activities name={user.name} />
+          ) : (
+            <Report name={user.name} />
+          )}
         </S.RightContent>
       </S.Content>
       {openEditModal && (

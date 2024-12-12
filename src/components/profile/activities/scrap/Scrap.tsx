@@ -5,6 +5,7 @@ import * as S from './Scrap.Style';
 import { useEffect, useState } from 'react';
 import { deleteScrap, getScrap } from '../../../../api/Profile';
 import { ListProps } from '../../../../types/newsType';
+import ErrorIcon from '../../../../assets/icons/ErrorIcon.svg?react';
 
 interface ScrapProps {
   nickname: string;
@@ -48,29 +49,36 @@ const Scrap = ({ nickname }: ScrapProps) => {
   return (
     <S.ScrapContent>
       <S.Text>{nickname}님이 스크랩한 뉴스</S.Text>
-      <S.Content>
-        <S.CardList>
-          {scrapList?.map((card) => (
-            <Card
-              key={card.basenewsId}
-              imageUrl={card.imageUrl}
-              isSelected={card.isScrapped}
-              category={card.category}
-              keyword={card.keyword}
-              title={card.title}
-              description={card.summary}
-              date={card.date}
-              onClickBookmark={() => handleUnScrap(card.basenewsId)}
-              onClickCard={() => handleCardClick(card.basenewsId)}
-            />
-          ))}
-        </S.CardList>
-        <PageNation
-          totalPages={totalPage}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-        />
-      </S.Content>
+      {scrapList && scrapList.length > 0 ? (
+        <S.Content>
+          <S.CardList>
+            {scrapList.map((card) => (
+              <Card
+                key={card.basenewsId}
+                imageUrl={card.imageUrl}
+                isSelected={card.isScrapped}
+                category={card.category}
+                keyword={card.keyword}
+                title={card.title}
+                description={card.summary}
+                date={card.date}
+                onClickBookmark={() => handleUnScrap(card.basenewsId)}
+                onClickCard={() => handleCardClick(card.basenewsId)}
+              />
+            ))}
+          </S.CardList>
+          <PageNation
+            totalPages={totalPage}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        </S.Content>
+      ) : (
+        <S.NoContent>
+          <ErrorIcon />
+          아직 스크랩한 뉴스가 없어요!
+        </S.NoContent>
+      )}
     </S.ScrapContent>
   );
 };

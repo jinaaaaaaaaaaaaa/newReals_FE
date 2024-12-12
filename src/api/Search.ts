@@ -20,7 +20,6 @@ export const getSearchResults = async (searchWord: string, page: number) => {
     if (res.data.data) {
       return res.data.data;
     }
-    console.log(res.data);
   } catch (err) {
     console.error('검색 오류:', err);
     alert(err);

@@ -36,7 +36,6 @@ const Search = () => {
           setSearchList(results.basenewsList);
           setTotalPage(results.totalPage);
           setTotalElement(results.totalElement);
-          console.log('검색 결과:', results);
         } catch (error) {
           console.error('검색 호출 오류:', error);
         } finally {

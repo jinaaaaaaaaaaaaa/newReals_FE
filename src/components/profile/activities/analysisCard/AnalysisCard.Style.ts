@@ -48,3 +48,32 @@ export const GradeList = styled.div`
   flex-direction: column;
   gap: 0.5rem;
 `;
+
+export const NoContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  height: 100%;
+  background-color: ${Colors.Main0};
+  border-radius: 0.75rem;
+`;
+
+export const NoText = styled.p`
+  ${FontStyles.SM_Medium}
+  color : ${Colors.Grayscale60};
+  text-align: center;
+`;
+
+export const Button = styled.button`
+  width: fit-content;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: ${Colors.Grayscale5};
+  color: ${Colors.Grayscale50};
+  ${FontStyles.SM_SemiBold}
+  cursor: pointer;
+`;
