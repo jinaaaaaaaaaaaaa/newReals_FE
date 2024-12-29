@@ -11,6 +11,10 @@ export const container = styled.section`
   padding: 1.25rem;
   border-radius: 1rem;
   background-color: ${Colors.Grayscale5};
+
+  @media (max-width: 767px) {
+    width: 22.375rem;
+  }
 `;
 
 export const Profile = styled.div`
@@ -99,6 +103,7 @@ export const CoinNumber = styled.span`
   ${FontStyles.SM_SemiBold}
   color: ${Colors.Main50};
 `;
+
 export const InfoContainer = styled.div`
   position: relative;
   display: inline-block;

@@ -7,6 +7,10 @@ export const PageNation = styled.div`
   gap: 2rem;
   align-items: center;
   margin-top: 1rem;
+
+  @media (max-width: 767px) {
+    margin: 0rem 1rem;
+  }
 `;
 
 export const PageNumber = styled.div<{ $isActive: boolean }>`

@@ -1,5 +1,6 @@
 import Tag from '../../common/tag/Tag';
 import * as S from './Intro_2.Style';
+import Logo from '../../../assets/icons/Logo.svg';
 
 const TagProps = [
   '뉴스 큐레이션',
@@ -11,9 +12,13 @@ const TagProps = [
 const Intro_2 = () => {
   return (
     <S.SecondIntro>
-      <p>
-        <S.Logo>newReals </S.Logo>에서 맞춤형 뉴스를 추천받아요!
-      </p>
+      <S.Ment>
+        <S.Logo>
+          <S.LogoIcon src={Logo} alt="로고" />
+          NEWREALS
+        </S.Logo>
+        에서 맞춤형 뉴스를 추천받아요!
+      </S.Ment>
       <S.Tag>
         {TagProps.map((item, index) => (
           <Tag key={index} children={`# ${item}`} color="purple" size="large" />

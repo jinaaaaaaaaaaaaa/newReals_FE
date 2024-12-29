@@ -4,6 +4,8 @@ import { Colors, FontStyles } from '../../../styles';
 export const Chip = styled.div<{ $isSelected: boolean; $size?: 'small' | 'large' }>`
   ${({ $size }) => ($size === 'small' ? FontStyles.XS_Medium : FontStyles.SM_SemiBold)}
   width: fit-content;
+  height: fit-content;
+  white-space: nowrap;
   padding: ${({ $size }) => ($size === 'small' ? '0.25rem 0.75rem' : '0.5rem 1rem')};
   border-radius: 25rem;
   border: 1px solid ${({ $isSelected }) => ($isSelected ? Colors.Main50 : 'none')};

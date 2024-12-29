@@ -23,14 +23,25 @@ export const Title = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (max-width: 767px) {
+    max-width: 12.5rem;
+  }
 `;
 
-export const goToDetail = styled.div`
-  ${FontStyles.MD2_Medium}
+export const GoToDetail = styled.div`
   display: flex;
   align-items: center;
   gap: 0.375rem;
+`;
+
+export const DetailText = styled.p`
+  ${FontStyles.MD2_Medium}
   color: ${Colors.Grayscale50};
+
+  @media (max-width: 767px) {
+    display: none;
+  }
 `;
 
 export const Comment = styled.div`
@@ -45,4 +56,12 @@ export const Text = styled.p`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (max-width: 767px) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    white-space: wrap;
+  }
 `;

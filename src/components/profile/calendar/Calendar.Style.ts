@@ -11,11 +11,19 @@ export const Container = styled.div`
   padding: 1.25rem;
   border-radius: 1rem;
   border: 1px solid ${Colors.Grayscale10};
+
+  @media (max-width: 767px) {
+    width: 22.375rem;
+  }
 `;
 
 export const Title = styled.span`
   ${FontStyles.MD1_Bold}
   color: ${Colors.Grayscale80};
+
+  @media (max-width: 767px) {
+    ${FontStyles.MD2_Bold}
+  }
 `;
 
 export const Description = styled.p`
@@ -34,6 +42,11 @@ export const WeekHeader = styled.div`
   width: 100%;
   justify-content: space-between;
   margin-bottom: 0.5rem;
+
+  @media (max-width: 767px) {
+    justify-content: flex-start;
+    gap: 0.9rem;
+  }
 `;
 
 export const WeekDay = styled.div`

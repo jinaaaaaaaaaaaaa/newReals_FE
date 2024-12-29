@@ -20,10 +20,10 @@ const Item = ({ title, comment, id }: ItemProps) => {
     <S.Container>
       <S.Header>
         <S.Title>{title}</S.Title>
-        <S.goToDetail onClick={handleClickDetail}>
-          자세히 보기
+        <S.GoToDetail onClick={handleClickDetail}>
+          <S.DetailText>자세히 보기</S.DetailText>
           <RightArrowIcon />
-        </S.goToDetail>
+        </S.GoToDetail>
       </S.Header>
       <S.Comment>
         <Tag color="purple">나의 의견</Tag>

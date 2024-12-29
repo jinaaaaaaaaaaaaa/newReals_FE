@@ -32,4 +32,8 @@ export const PageButton = styled.button<{ $buttonStyle: 'left' | 'right' }>`
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+
+  @media (max-width: 767px) {
+    max-width: 8rem;
+  }
 `;

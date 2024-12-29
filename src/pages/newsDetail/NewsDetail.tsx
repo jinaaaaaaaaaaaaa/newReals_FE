@@ -195,30 +195,32 @@ const NewsDetail = () => {
                     interesting={likesData.interesting}
                   />
                 ) : null}
-                <S.PageNavigate>
-                  <div>
-                    {nextNews && (
-                      <PageButton
-                        children={nextNews.title}
-                        buttonStyle="left"
-                        onClick={() => {
-                          handleSideNewsClick(nextNews.basenewsID);
-                        }}
-                      />
-                    )}
-                  </div>
-                  <div>
-                    {prevNews && (
-                      <PageButton
-                        children={prevNews.title}
-                        buttonStyle="right"
-                        onClick={() => {
-                          handleSideNewsClick(prevNews.basenewsID);
-                        }}
-                      />
-                    )}
-                  </div>
-                </S.PageNavigate>
+                {nextNews && (
+                  <>
+                    <S.PageNavigate>
+                      <div>
+                        <PageButton
+                          children={nextNews.title}
+                          buttonStyle="left"
+                          onClick={() => {
+                            handleSideNewsClick(nextNews.basenewsID);
+                          }}
+                        />
+                      </div>
+                      <div>
+                        {prevNews && (
+                          <PageButton
+                            children={prevNews.title}
+                            buttonStyle="right"
+                            onClick={() => {
+                              handleSideNewsClick(prevNews.basenewsID);
+                            }}
+                          />
+                        )}
+                      </div>
+                    </S.PageNavigate>
+                  </>
+                )}
               </S.NewsPart>
               {quizData && (
                 <S.QuizPart>

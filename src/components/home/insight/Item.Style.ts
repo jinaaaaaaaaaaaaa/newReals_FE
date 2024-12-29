@@ -7,6 +7,10 @@ export const Item = styled.div`
   padding: 1.25rem;
   background-color: ${Colors.Main0};
   border-radius: 0.75rem;
+
+  @media (max-width: 767px) {
+    position: relative;
+  }
 `;
 
 export const TitleContainer = styled.div`
@@ -15,6 +19,12 @@ export const TitleContainer = styled.div`
   gap: 0.75rem;
   align-items: center;
   color: ${Colors.Grayscale70};
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+  }
 `;
 
 export const GoToNews = styled.div`
@@ -24,4 +34,10 @@ export const GoToNews = styled.div`
   align-items: center;
   color: ${Colors.Grayscale50};
   cursor: pointer;
+
+  @media (max-width: 767px) {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+  }
 `;

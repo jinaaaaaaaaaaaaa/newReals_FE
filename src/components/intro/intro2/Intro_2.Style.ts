@@ -11,18 +11,42 @@ export const SecondIntro = styled.div`
   align-items: center;
   gap: 1rem;
   align-self: stretch;
+  @media (max-width: 767px) {
+    ${FontStyles.MD2_SemiBold};
+    justify-content: center;
+    align-items: center;
+    height: 16.25rem;
+    width: 100%;
+    padding: 3rem 1.875rem;
+  }
 `;
 
+export const LogoIcon = styled.img``;
+
 export const Logo = styled.span`
-  color: ${Colors.Black};
-  text-align: center;
-  font-family: 'Syncopate';
-  font-size: 1.875rem;
-  line-height: 140%;
+  display: flex;
+  color: ${Colors.Grayscale90};
+  font-family: 'Couture';
+  font-size: 1.15rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-right: 0.25rem;
+`;
+
+export const Ment = styled.p`
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
 `;
 
 export const Tag = styled.div`
   display: flex;
   white-space: nowrap;
   gap: 0.75rem;
+  @media (max-width: 767px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
 `;

@@ -7,6 +7,13 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+
+  @media (max-width: 767px) {
+    min-width: 22.375rem;
+    max-width: 46.25rem;
+    width: 100%;
+    gap: 2rem;
+  }
 `;
 
 export const TextContainer = styled.div`
@@ -14,16 +21,29 @@ export const TextContainer = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 0.375rem;
+
+  @media (max-width: 767px) {
+    gap: 0.375rem;
+  }
 `;
 
 export const Title = styled.span`
   ${FontStyles.XL_Bold};
   color: ${Colors.Grayscale90};
+
+  @media (max-width: 767px) {
+    ${FontStyles.LG_Bold}
+  }
 `;
 
 export const DescrtionContainer = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 `;
 
 export const Description = styled.p`
@@ -34,15 +54,14 @@ export const Description = styled.p`
 export const Keywords = styled.div`
   display: flex;
   gap: 1rem;
-`;
 
-export const CardContainer = styled.div`
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3rem 1.25rem;
-
-  @media (max-width: 1280px) {
-    grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 767px) {
+    gap: 0.75rem;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none; /* IE에서 스크롤바 숨김 */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Edge에서 스크롤바 숨기기 */
+    }
   }
 `;

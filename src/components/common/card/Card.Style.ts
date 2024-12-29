@@ -16,6 +16,11 @@ export const Image = styled.img`
   width: 100%;
   height: 11.25rem;
   border-radius: 1rem;
+  object-fit: cover;
+
+  @media (max-width: 767px) {
+    height: 11.25rem;
+  }
 `;
 
 export const Bookmark = styled.div`
@@ -66,6 +71,12 @@ export const Title = styled.span`
   color: ${Colors.Grayscale90};
   margin-top: 0.375rem;
   margin-bottom: 0.5rem;
+
+  @media (max-width: 767px) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 export const Description = styled.p`

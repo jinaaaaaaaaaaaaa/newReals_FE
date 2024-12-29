@@ -5,6 +5,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+
+  @media (max-width: 767px) {
+    width: 358px;
+  }
 `;
 
 export const Text = styled.span`
@@ -28,6 +32,10 @@ export const Insight = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media (max-width: 767px) {
+    max-height: 32.4375rem;
+  }
 `;
 
 export const NoContent = styled.div`
@@ -50,6 +58,10 @@ export const NoText = styled.p`
   ${FontStyles.MD2_Medium}
   color: ${Colors.Grayscale60};
   text-align: center;
+
+  @media (max-width: 767px) {
+    ${FontStyles.SM_Medium}
+  }
 `;
 
 export const Button = styled.button`

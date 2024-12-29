@@ -17,6 +17,10 @@ export const TextContainer = styled.div`
 export const Text = styled.span`
   ${FontStyles.XL_Bold}
   color: ${Colors.Grayscale90};
+
+  @media (max-width: 767px) {
+    ${FontStyles.LG_Bold}
+  }
 `;
 
 export const Description = styled.p`

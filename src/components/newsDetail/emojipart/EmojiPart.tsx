@@ -62,20 +62,18 @@ const EmojiPart = ({ id, action, good, bad, interesting }: EmojiProps) => {
   return (
     <S.EmojiClickPart>
       이 기사에 대해 어떻게 생각하시나요?
-      <S.MainPart>
-        <S.ClickPart>
-          {ICONS.map((icon) => (
-            <IconPart
-              key={icon.id}
-              src={icon.imoji}
-              content={icon.content}
-              count={likeCounts[icon.id]}
-              isSelected={selectedIcon === icon.id}
-              onClick={() => handleClickLikeButton(icon.id)}
-            />
-          ))}
-        </S.ClickPart>
-      </S.MainPart>
+      <S.ClickPart>
+        {ICONS.map((icon) => (
+          <IconPart
+            key={icon.id}
+            src={icon.imoji}
+            content={icon.content}
+            count={likeCounts[icon.id]}
+            isSelected={selectedIcon === icon.id}
+            onClick={() => handleClickLikeButton(icon.id)}
+          />
+        ))}
+      </S.ClickPart>
     </S.EmojiClickPart>
   );
 };

@@ -35,6 +35,10 @@ export const Modal = styled.div`
   background-color: ${Colors.Main0};
   gap: 1rem;
   padding: 1.25rem;
+
+  @media (max-width: 767px) {
+    width: 16.125rem;
+  }
 `;
 
 export const Icon = styled.div`

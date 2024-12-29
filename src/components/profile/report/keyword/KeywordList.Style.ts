@@ -6,6 +6,10 @@ export const Cotainer = styled.div`
   flex-direction: column;
   gap: 0.75rem;
   width: 50%;
+
+  @media (max-width: 767px) {
+    width: 19.375rem;
+  }
 `;
 
 export const Title = styled.span`

@@ -3,7 +3,10 @@ import Logo from '../../../assets/icons/Logo.svg';
 import PeopleIcon from '../../../assets/icons/PeopleIcon.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
+import SearchIcon from '../../../assets/icons/SearchIcon.svg';
+import Etc from '../../../assets/icons/Etc.svg';
 import PointAlert from '../chip/PointAlert';
+import { useEffect, useState } from 'react';
 
 const CATEGORIES = [
   { path: '/category/politics', label: '정치' },
@@ -11,9 +14,29 @@ const CATEGORIES = [
   { path: '/category/society', label: '사회' },
 ];
 
+const MENUS = [
+  { path: '/category/politics', label: '정치' },
+  { path: '/category/economy', label: '경제' },
+  { path: '/category/society', label: '사회' },
+  { path: '/profile', label: 'MY' },
+  { path: '/market', label: '포인트 상품' },
+];
+
 const Header = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const kakaoRestKey = import.meta.env.VITE_KAKAO_REST_KEY;
   const redirectUri = import.meta.env.VITE_KAKAO_REDIRECT_URI;
@@ -26,15 +49,65 @@ const Header = () => {
     window.location.href = kauthUrl;
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
   if (pathname === '/register') return null;
+
+  if (isMobile) {
+    return (
+      <>
+        <S.MobileHeaderContainer>
+          <S.Head>
+            <S.Service onClick={() => (pathname === '/' ? navigate('/') : navigate('/home'))}>
+              <S.ServiceImg src={Logo} alt="Logo" />
+              <S.ServiceName>NEWREALS</S.ServiceName>
+            </S.Service>
+            {pathname === '/' ? (
+              <S.LoginPart onClick={handleLoginClick}>
+                <S.Login>로그인 / 회원가입</S.Login>
+              </S.LoginPart>
+            ) : (
+              <S.SidePart>
+                {pathname === '/market' && (
+                  <PointAlert type="header" leftcontent="" rightcontent="30,000" />
+                )}
+                <S.MobileEtc src={Etc} alt="목록" onClick={toggleMenu} />
+              </S.SidePart>
+            )}
+            {isMenuOpen && (
+              <S.MobileMenu>
+                {MENUS.map((menu) => (
+                  <S.MobileMenuItem
+                    key={menu.path}
+                    onClick={() => {
+                      navigate(menu.path);
+                      setIsMenuOpen(false); // 메뉴 닫기
+                    }}
+                  >
+                    {menu.label}
+                  </S.MobileMenuItem>
+                ))}
+              </S.MobileMenu>
+            )}
+          </S.Head>
+          {pathname !== '/' && pathname !== '/profile' && pathname !== '/market' && (
+            <S.SearchBarContainer>
+              <SearchBar />
+            </S.SearchBarContainer>
+          )}
+        </S.MobileHeaderContainer>
+      </>
+    );
+  }
 
   return (
     <S.Head>
-      <S.ServiceImg
-        onClick={() => (pathname === '/' ? navigate('/') : navigate('/home'))}
-        src={Logo}
-        alt="Logo"
-      />
+      <S.Service onClick={() => (pathname === '/' ? navigate('/') : navigate('/home'))}>
+        <S.ServiceImg src={Logo} alt="Logo" />
+        <S.ServiceName>NEWREALS</S.ServiceName>
+      </S.Service>
       {pathname === '/' ? (
         <S.LoginPart onClick={handleLoginClick}>
           <S.LoginImg src={PeopleIcon} alt="LoginIcon" />

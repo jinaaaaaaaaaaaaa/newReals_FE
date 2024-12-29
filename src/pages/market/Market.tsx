@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Chip from '../../components/common/chip/Chip';
 import * as S from './Market.Style';
 import ItemList from '../../components/market/ItemList';
@@ -61,6 +61,17 @@ const Market = () => {
   const [selectedChip, setSelectedChip] = useState('구매가능한 상품');
   const totalPage = 1;
   const [currentPage, setCurrentPage] = useState(1);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -80,7 +91,7 @@ const Market = () => {
               {chip}
             </Chip>
           ))}
-          <S.Count>{Items.length}개의 상품</S.Count>
+          {!isMobile && <S.Count>{Items.length}개의 상품</S.Count>}
         </S.ChipContainer>
       </S.Text>
       <ItemList items={Items} />

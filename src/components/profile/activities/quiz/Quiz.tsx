@@ -47,7 +47,7 @@ const Quiz = () => {
           오늘의 퀴즈<S.SubText>퀴즈를 풀고 포인트를 적립하세요</S.SubText>
         </S.TextContianer>
         <S.Quiz>
-          아직 풀지 않은 퀴즈는 해당 퀴즈 번호를 클릭해 퀴즈를 풀러 가요.
+          풀지 않은 퀴즈는 해당 퀴즈 번호를 클릭해 퀴즈를 풀러 가요!
           <S.ItemContainer>
             {quizData.length > 0 ? (
               quizData.map((item, index) =>

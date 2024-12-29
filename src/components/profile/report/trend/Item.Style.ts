@@ -8,6 +8,11 @@ export const Item = styled.div`
   padding: 1.25rem;
   border-radius: 0.5rem;
   background-color: ${Colors.Main0};
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const Text = styled.p`

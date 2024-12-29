@@ -18,6 +18,10 @@ export const TextContainer = styled.div`
 export const Description = styled.p`
   ${FontStyles.MD2_Medium}
   color : ${Colors.Grayscale50};
+
+  @media (max-width: 767px) {
+    ${FontStyles.XS_Medium}
+  }
 `;
 
 export const Report = styled.div`
@@ -28,16 +32,19 @@ export const Report = styled.div`
   padding: 1.5rem;
   border-radius: 1rem;
   border: 1px solid ${Colors.Grayscale10};
-`;
 
-export const Title = styled.span`
-  ${FontStyles.MD2_Bold}
-  color : ${Colors.Grayscale90};
+  @media (max-width: 767px) {
+    width: 22.375rem;
+  }
 `;
 
 export const ContentContainer = styled.div`
   display: flex;
   gap: 1.25rem;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 
 export const NoContent = styled.div`
@@ -50,12 +57,20 @@ export const NoContent = styled.div`
   gap: 0.75rem;
   border-radius: 1rem;
   border: 1px solid ${Colors.Grayscale10};
+
+  @media (max-width: 767px) {
+    width: 22.375rem;
+  }
 `;
 
 export const Text = styled.span`
   ${FontStyles.MD2_Medium}
   color: ${Colors.Grayscale60};
   text-align: center;
+
+  @media (max-width: 767px) {
+    ${FontStyles.SM_Medium}
+  }
 `;
 
 export const Button = styled.button`

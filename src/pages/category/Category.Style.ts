@@ -7,6 +7,10 @@ export const Container = styled.div`
   align-items: center;
   padding: 3.75rem 8.75rem;
   gap: 2rem;
+
+  @media (max-width: 767px) {
+    padding: 3.75rem 1rem;
+  }
 `;
 
 export const TextContainer = styled.div`
@@ -19,6 +23,10 @@ export const TextContainer = styled.div`
 export const Title = styled.span`
   color: ${Colors.Grayscale90};
   ${FontStyles.XL_Bold};
+
+  @media (max-width: 767px) {
+    ${FontStyles.LG_Bold};
+  }
 `;
 
 export const Description = styled.p`

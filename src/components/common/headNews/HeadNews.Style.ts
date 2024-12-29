@@ -14,6 +14,12 @@ export const HeadNews = styled.div<{ $imageUrl: string | null }>`
   flex-direction: column;
   gap: 2rem;
   color: ${Colors.Main0};
+
+  @media (max-width: 767px) {
+    height: 32.5rem;
+    padding: 10rem 1.5rem 0rem;
+    gap: 2rem;
+  }
 `;
 
 export const Container = styled.div`
@@ -31,6 +37,10 @@ export const TextContainer = styled.div`
 export const Head = styled.div`
   display: flex;
   gap: 1.25rem;
+
+  @media (max-width: 767px) {
+    gap: 1rem;
+  }
 `;
 
 export const Tags = styled.div`
@@ -40,6 +50,10 @@ export const Tags = styled.div`
 
 export const Title = styled.span`
   ${FontStyles.XXL_Bold}
+
+  @media (max-width: 767px) {
+    ${FontStyles.XL_Bold}
+  }
 `;
 
 export const Quiz = styled.div`
@@ -52,6 +66,12 @@ export const Quiz = styled.div`
   border-radius: 0.75rem;
   background-color: rgba(255, 255, 255, 0.3);
   cursor: pointer;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
 `;
 
 export const Navigation = styled.div`

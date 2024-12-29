@@ -13,10 +13,11 @@ export const EmojiClickPart = styled.div`
   align-self: stretch;
 `;
 
-export const MainPart = styled.div``;
-
 export const ClickPart = styled.div`
   justify-content: center;
   display: flex;
   gap: 8.875rem;
+  @media (max-width: 767px) {
+    gap: 5rem;
+  }
 `;

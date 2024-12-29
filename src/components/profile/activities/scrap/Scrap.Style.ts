@@ -18,6 +18,10 @@ export const Content = styled.div`
   flex-direction: column;
   gap: 1.25rem;
   align-items: center;
+
+  @media (max-width: 767px) {
+    gap: 3rem;
+  }
 `;
 
 export const CardList = styled.div`
@@ -25,6 +29,11 @@ export const CardList = styled.div`
   width: 100%;
   grid-template-columns: repeat(3, 1fr);
   gap: 3rem 1.25rem;
+
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+  }
 `;
 
 export const NoContent = styled.div`
@@ -38,4 +47,8 @@ export const NoContent = styled.div`
   padding: 6.25rem 0rem;
   gap: 0.75rem;
   color: ${Colors.Grayscale60};
+
+  @media (max-width: 767px) {
+    width: 22.375rem;
+  }
 `;

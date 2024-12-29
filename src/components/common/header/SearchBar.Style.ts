@@ -10,6 +10,9 @@ export const InputPart = styled.div`
   border-radius: 0.75rem;
   border: 1px solid ${Colors.Grayscale10};
   background-color: ${Colors.Main0};
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 `;
 
 export const Input = styled.input`

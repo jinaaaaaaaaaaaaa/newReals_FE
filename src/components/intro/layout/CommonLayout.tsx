@@ -19,7 +19,7 @@ const CommonLayout = ({
   const isLeft = direction === 'left';
 
   return (
-    <S.IntroMent isLeft={isLeft}>
+    <S.IntroMent $isLeft={isLeft}>
       <IntroContent
         firstComment={firstComment}
         secondComment={secondComment}

@@ -8,6 +8,9 @@ export const ModalPart = styled.div`
   width: 26.25rem;
   border-radius: 1rem;
   background: ${Colors.Main0};
+  @media (max-width: 767px) {
+    width: 20.25rem;
+  }
 `;
 
 export const ModalHead = styled.div`

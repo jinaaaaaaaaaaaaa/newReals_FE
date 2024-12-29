@@ -8,4 +8,11 @@ export const ItemListBox = styled.div`
   @media (max-width: 1280px) {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+  }
 `;

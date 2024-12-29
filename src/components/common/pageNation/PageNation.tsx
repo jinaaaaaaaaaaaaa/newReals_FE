@@ -1,6 +1,7 @@
 import * as S from './PageNation.Style';
 import LeftArrowIcon from '../../../assets/icons/LeftArrowIcon.svg';
 import RigthArrowIcon from '../../../assets/icons/RightArrowIcon.svg';
+import { useEffect, useState } from 'react';
 
 interface PageNationProps {
   totalPages: number;
@@ -13,7 +14,17 @@ interface PageNationProps {
  * @returns
  */
 const PageNation = ({ totalPages, currentPage, onPageChange }: PageNationProps) => {
-  const maxVisiblePages = 12;
+  const [maxVisiblePages, setMaxVisiblePages] = useState(12);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setMaxVisiblePages(window.innerWidth <= 767 ? 4 : 12);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
   const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);

@@ -1,15 +1,17 @@
 import * as S from './Footer.Style';
 import NotionIcon from '../../../assets/icons/NotionIcon.svg';
-import InstagramIcon from '../../../assets/icons/InstagramIcon.svg';
-import MailIcon from '../../../assets/icons/MailIcon.svg';
+import GithubIcon from '../../../assets/icons/GitHubIcon.svg';
 
 const ICON_ITEM = [
-  { name: 'notion', icon: NotionIcon, url: 'https://www.naver.com' },
-  { name: 'instagram', icon: InstagramIcon, url: 'https://www.naver.com' },
-  { name: 'mail', icon: MailIcon, url: 'https://www.naver.com' },
-]; // 추후 링크들 수정 필요!
+  {
+    name: 'notion',
+    icon: NotionIcon,
+    url: 'https://flash-hook-93f.notion.site/newREALs-16b5e8a517dd80b0a45ecff6b01ecfb1?pvs=4',
+  },
+  { name: 'github', icon: GithubIcon, url: 'https://github.com/2024-Fall-CapstoneDesign' },
+];
 
-const MEMBER_DATA = ['김진아', '나현진', '안연아', '윤예은', '이서현'];
+const MEMBER_DATA = ['김진아', '나현진', '안연아', '윤예은', '이서현', '설정원'];
 
 const Footer = () => {
   return (
@@ -32,7 +34,6 @@ const Footer = () => {
             {MEMBER_DATA.map((member, index) => (
               <S.NameContainer key={index}>
                 <p>{member}</p>
-                {index < MEMBER_DATA.length - 1 && <S.Divider />}
               </S.NameContainer>
             ))}
           </S.NameContainer>

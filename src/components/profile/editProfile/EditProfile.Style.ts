@@ -9,6 +9,10 @@ export const Modal = styled.div`
   gap: 1rem;
   border-radius: 1rem;
   background-color: ${Colors.Main0};
+
+  @media (max-width: 767px) {
+    width: 20.25rem;
+  }
 `;
 
 export const Content = styled.div`
@@ -74,14 +78,6 @@ export const Image = styled.div`
   gap: 0.25rem;
 `;
 
-// PR 머지되면 없어질 부분
-export const ImageD = styled.div`
-  width: 5.25rem;
-  height: 5.25rem;
-  border-radius: 12.5rem;
-  background-color: ${Colors.Main10};
-`;
-
 export const Text = styled.p`
   ${FontStyles.XS_Regular}
   color: ${Colors.Grayscale70};
@@ -100,6 +96,10 @@ export const EditImage = styled.div`
 export const ImageButtonContainer = styled.div`
   display: flex;
   gap: 0.5rem;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 
 export const ImageButton = styled.button`

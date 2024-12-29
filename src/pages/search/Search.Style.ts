@@ -7,6 +7,11 @@ export const Container = styled.div`
   align-items: center;
   padding: 3.75rem 8.75rem;
   gap: 2rem;
+  @media (max-width: 767px) {
+    width: 100%;
+    padding: 2rem 1rem;
+    border-top: 1px solid ${Colors.Grayscale10};
+  }
 `;
 
 export const HeadPart = styled.div`
@@ -22,11 +27,18 @@ export const Title = styled.p`
   display: flex;
   gap: 0.75rem;
   align-items: center;
+  @media (max-width: 767px) {
+    ${FontStyles.MD1_Bold};
+    gap: 0.5rem;
+  }
 `;
 
 export const Keyword = styled.span`
   color: ${Colors.Main50};
   ${FontStyles.XL_Bold};
+  @media (max-width: 767px) {
+    ${FontStyles.MD1_Bold};
+  }
 `;
 
 export const Close = styled.span`

@@ -11,6 +11,11 @@ export const Footer = styled.footer`
   flex-direction: column;
   gap: 1.5rem;
   color: ${Colors.Grayscale90};
+
+  @media (max-width: 767px) {
+    height: 21.5625rem;
+    padding: 2rem 1rem;
+  }
 `;
 
 export const Logo = styled.span`
@@ -21,10 +26,19 @@ export const Content = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
 `;
 
 export const Title = styled.span`
   ${FontStyles.MD2_Bold}
+
+  @media (max-width: 767px) {
+    ${FontStyles.SM_SemiBold}
+  }
 `;
 
 export const About = styled.div`
@@ -35,7 +49,7 @@ export const About = styled.div`
 
 export const IconContainer = styled.div`
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
 `;
 
 export const Icon = styled.img`
@@ -48,19 +62,27 @@ export const Member = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
+
+  @media (max-width: 767px) {
+    flex-wrap: wrap;
+    width: 9.375rem;
+  }
 `;
 
 export const NameContainer = styled.div`
   display: flex;
   gap: 1.25rem;
-`;
 
-export const Divider = styled.div`
-  width: 0.0625rem;
-  height: 1rem;
-  background-color: ${Colors.Grayscale90};
+  @media (max-width: 767px) {
+    ${FontStyles.SM_Medium};
+    white-space: nowrap;
+  }
 `;
 
 export const Copyright = styled.p`
   color: ${Colors.Grayscale70};
+
+  @media (max-width: 767px) {
+    ${FontStyles.SM_SemiBold}
+  }
 `;

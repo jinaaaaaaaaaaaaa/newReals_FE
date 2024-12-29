@@ -10,6 +10,11 @@ export const Container = styled.section`
   padding: 1.25rem;
   border-radius: 1rem;
   background-color: ${Colors.Main5};
+
+  @media (max-width: 767px) {
+    width: 22.375rem;
+    flex-grow: 0;
+  }
 `;
 
 export const Title = styled.span`
@@ -29,6 +34,10 @@ export const Analysis = styled.div`
   gap: 1rem;
   border-radius: 0.75rem;
   background-color: ${Colors.Main0};
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 
 export const Content = styled.div`
@@ -59,6 +68,10 @@ export const NoContent = styled.div`
   height: 100%;
   background-color: ${Colors.Main0};
   border-radius: 0.75rem;
+
+  @media (max-width: 767px) {
+    padding: 3rem 1rem;
+  }
 `;
 
 export const NoText = styled.p`

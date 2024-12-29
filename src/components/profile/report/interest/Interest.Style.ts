@@ -21,6 +21,10 @@ export const Analysis = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 
 export const Bubbles = styled.div`

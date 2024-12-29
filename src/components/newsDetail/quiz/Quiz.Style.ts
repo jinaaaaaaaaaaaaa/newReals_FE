@@ -11,6 +11,9 @@ export const Container = styled.div`
   border-radius: 0.75rem;
   color: ${Colors.Black};
   gap: 0.75rem;
+  @media (max-width: 767px) {
+    max-width: none;
+  }
 `;
 
 export const Quiz = styled.span`

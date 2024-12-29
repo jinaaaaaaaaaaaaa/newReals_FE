@@ -9,6 +9,10 @@ export const Modal = styled.div`
   flex-direction: column;
   border-radius: 1rem;
   background-color: ${Colors.Main0};
+
+  @media (max-width: 767px) {
+    width: 20.25rem;
+  }
 `;
 
 export const Header = styled.div`
@@ -59,6 +63,7 @@ export const Categories = styled.div`
   overflow: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  gap: 1.25rem;
 
   &::-webkit-scrollbar {
     display: none;
