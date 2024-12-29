@@ -3,7 +3,6 @@ import Logo from '../../../assets/icons/Logo.svg';
 import PeopleIcon from '../../../assets/icons/PeopleIcon.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
-import SearchIcon from '../../../assets/icons/SearchIcon.svg';
 import Etc from '../../../assets/icons/Etc.svg';
 import PointAlert from '../chip/PointAlert';
 import { useEffect, useState } from 'react';
