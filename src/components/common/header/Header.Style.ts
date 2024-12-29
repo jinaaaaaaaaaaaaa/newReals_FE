@@ -5,7 +5,7 @@ import { Colors, FontStyles } from '../../../styles';
 export const MobileHeaderContainer = styled.div`
   position: relative;
   width: 100%;
-  background-color: #fff; /* 배경색 */
+  background-color: ${Colors.Main0}; /* 배경색 */
   z-index: 10; /* 모바일 메뉴보다 위로 배치 */
 `;
 
@@ -59,7 +59,7 @@ export const MobileMenu = styled.div`
   left: 0;
   width: 100%;
   background-color: ${Colors.Main0};
-  box-shadow: 0 0.25rem 0.375rem ${Colors.Black};
+  box-shadow: 0 0 0.2rem ${Colors.Black};
   display: flex;
   flex-direction: column;
   padding: 1rem 0;
